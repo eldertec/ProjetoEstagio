@@ -7,8 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 
 @Entity
 public class Curso implements Serializable {
@@ -24,17 +22,14 @@ public class Curso implements Serializable {
 	private String hora;
 	private String duracao;
 	private Double valor;
-
-	@OneToOne
-	@JoinColumn(name = "fk_instrutor")
-	private Instrutor instrutor;
+	private String instrutor;
 
 	public Curso() {
 		super();
 	}
 
 	public Curso(Long id, String nome, String descricao, String local, Date data, String hora, String duracao,
-			Double valor, Instrutor instrutor) {
+			Double valor, String instrutor) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -111,11 +106,11 @@ public class Curso implements Serializable {
 		this.valor = valor;
 	}
 
-	public Instrutor getInstrutor() {
+	public String getInstrutor() {
 		return instrutor;
 	}
 
-	public void setInstrutor(Instrutor instrutor) {
+	public void setInstrutor(String instrutor) {
 		this.instrutor = instrutor;
 	}
 

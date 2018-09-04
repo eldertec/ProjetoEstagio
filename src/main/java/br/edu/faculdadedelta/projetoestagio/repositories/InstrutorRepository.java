@@ -8,4 +8,6 @@ import br.edu.faculdadedelta.projetoestagio.domain.Instrutor;
 @Repository
 public interface InstrutorRepository extends JpaRepository<Instrutor, Long>{
 
+	
+	
 }

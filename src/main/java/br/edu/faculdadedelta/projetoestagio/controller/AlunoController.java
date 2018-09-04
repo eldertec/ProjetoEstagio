@@ -9,10 +9,11 @@ import br.edu.faculdadedelta.projetoestagio.domain.Aluno;
 import br.edu.faculdadedelta.projetoestagio.domain.Usuario;
 import br.edu.faculdadedelta.projetoestagio.repositories.AlunoRepository;
 import br.edu.faculdadedelta.projetoestagio.repositories.UsuarioRepository;
+import br.edu.faculdadedelta.projetoestagio.util.FacesUtil;
 
 @Controller
 @SessionScope
-@RequestMapping("cadastroAluno.xhtml")
+@RequestMapping("/cadastroAluno.xhtml")
 public class AlunoController {
 
 	private Aluno aluno = new Aluno();
@@ -38,10 +39,19 @@ public class AlunoController {
 		this.usuario = usuario;
 	}
 
+	public String limpar() {
+		usuario = new Usuario();
+		aluno = new Aluno();
+		return "cadastroAluno.xhtml";
+	}
+
 	public String salvar() {
+		usuario.setLogin(usuario.getEmail());
 		usuarioRepository.save(usuario);
 		aluno.setUsuario(usuario);
 		alunoRepository.save(aluno);
+		limpar();
+		FacesUtil.exibirMsg("Cadastro realizado com sucesso!");
 		return "cadastroAluno.xhtml";
 	}
 

@@ -1,0 +1,17 @@
+@charset "UTF-8";
+
+.botao{
+	text-align: right; 
+	padding: 5px;
+}
+
+
+
+.rodape{
+	border-top: 1px solid #808080; 
+	position: fixed; 
+	bottom: 0; 
+	left: 0; 
+	width: 100%; 
+	text-align: right;
+}
