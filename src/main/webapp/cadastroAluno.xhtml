@@ -7,73 +7,77 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core">
 
 <h:head>
+	<link rel="stylesheet" type="text/css" href="resources/css/estilo.css" />
 	<title>Alunos</title>
 </h:head>
 <h:body>
 	<h:form>
-		<p:layout fullPage="true">
-			<p:growl />
-			<p:layoutUnit position="north" header="">
-				<p:menubar>
-					<p:menuitem value="Home" url="index.xhtml" icon="ui-icon-home" />
-				</p:menubar>
-			</p:layoutUnit>
-			<p:layoutUnit position="center" resizable="true" header="Cadastro">
-				<p:panelGrid columns="2" style="width:100%;">
-					<f:facet name="header">
-						<p:outputLabel value="Preencha seus dados" />
-					</f:facet>
-					<p:outputLabel for="nome" value="Nome: " />
-					<p:inputText id="nome" value="#{alunoController.usuario.nome}"
-						required="true"
-						requiredMessage="O nome do aluno deve ser informado"
-						validatorMessage="O nome deve ter no máximo 100 caracteres"
-						label="Nome: ">
-						<f:validateLength maximum="100" />
-					</p:inputText>
-					<p:outputLabel for="mat" value="Matrícula: " />
-					<p:inputText id="mat" value="#{alunoController.aluno.matricula}"
-						required="true"
-						requiredMessage="O número da matrícula do aluno deve ser informado"
-						validatorMessage="O número da matrícula deve ter no máximo 10 caracteres"
-						label="Matrícula: ">
-						<f:validateLength maximum="10" />
-					</p:inputText>
-					<p:outputLabel for="cpf" value="CPF: " />
-					<p:inputText id="cpf" value="#{alunoController.usuario.cpf}"
-						label="CPF: " />
-					<p:outputLabel for="email" value="Email: " />
-					<p:inputText id="email" value="#{alunoController.usuario.email}"
-						label="Email: "  required="true"
-						requiredMessage="Aperte o botão Editar" />
-					<p:outputLabel for="dtn" value="Data de Nascimento: " />
-					<p:calendar id="dtn"
-						value="#{alunoController.usuario.dataNascimento}" required="true"
-						requiredMessage="A data de nascimento do aluno deve ser informada"
-						label="Data de Nascimento: ">
-						<f:convertDateTime pattern="dd/MM/yyyy"
-							timeZone="America/Sao_Paulo" />
-					</p:calendar>
-					<f:facet name="footer">
-						<div style="text-align: right; padding: 5px;">
-							<p:commandButton value="Salvar"
-								action="#{alunoController.salvar}" ajax="false"
-								icon="ui-icon-check" style="background: #339933;" />
-						</div>
-					</f:facet>
-				</p:panelGrid>
-			</p:layoutUnit>
-			<p:layoutUnit position="south" size="95" footer="">
-				<div>
-					<h:outputText
-						style="margin-left: 14px;margin-top: -4px;font-size:12px;"
-						value="5º Período/DevWeb2" />
-					<br />
-					<h:outputText style="font-size:14px;"
-						value="Sistemas de Informação" />
-				</div>
-			</p:layoutUnit>
-		</p:layout>
+		<p:growl />
+		<p:menubar>
+			<p:menuitem value="Home" url="index.xhtml" icon="ui-icon-home" />
+			<p:menuitem value="Cursos" url="cadastroCurso.xhtml"
+				icon="ui-icon-note" />
+		</p:menubar>
+		<p:panel id="basic" header="Cadastro de Aluno"
+			footer="Faculdade Delta" style="margin-bottom:20px">
+			<p:panelGrid columns="2">
+				<f:facet name="header">
+					<p:outputLabel value="Preencha seus dados" />
+				</f:facet>
+				<p:outputLabel for="nome" value="Nome: " />
+				<p:inputText id="nome" value="#{alunoController.usuario.nome}"
+					required="true"
+					requiredMessage="O nome do aluno deve ser informado"
+					validatorMessage="O nome deve ter no máximo 100 caracteres"
+					label="Nome: ">
+					<f:validateLength maximum="100" />
+				</p:inputText>
+				<p:outputLabel for="mat" value="Matrícula: " />
+				<p:inputText id="mat" value="#{alunoController.aluno.matricula}"
+					required="true"
+					requiredMessage="O número da matrícula do aluno deve ser informado"
+					validatorMessage="O número da matrícula deve ter no máximo 10 caracteres"
+					label="Matrícula: ">
+					<f:validateLength maximum="10" />
+				</p:inputText>
+				<p:outputLabel for="cpf" value="CPF: " />
+				<p:inputText id="cpf" value="#{alunoController.usuario.cpf}"
+					label="CPF: " />
+				<p:outputLabel for="email" value="Email: " />
+				<p:inputText id="email" value="#{alunoController.usuario.email}"
+					label="Email: " required="true" requiredMessage="Informe seu email" />
+				<p:outputLabel for="dtn" value="Data de Nascimento: " />
+				<p:calendar id="dtn"
+					value="#{alunoController.usuario.dataNascimento}" required="true"
+					requiredMessage="A data de nascimento do aluno deve ser informada"
+					label="Data de Nascimento: ">
+					<f:convertDateTime pattern="dd/MM/yyyy"
+						timeZone="America/Sao_Paulo" />
+				</p:calendar>
+				<p:outputLabel for="senha" value="Senha: " />
+				<p:password id="senha" value="#{alunoController.usuario.senha}"
+					label="Senha: " required="true" requiredMessage="Crie uma senha" />
+				<f:facet name="footer">
+					<div class="botao">
+						<p:commandButton value="Cancelar"
+							action="#{alunoController.limpar}" ajax="false" immediate="true"
+							icon="ui-icon-circle-close"
+							style="background: #FF0000;color: #ffffff;" />
+						<p:commandButton value="Salvar" action="#{alunoController.salvar}"
+							ajax="false" icon="ui-icon-circle-check"
+							style="background: #006400;color: #ffffff;" />
+					</div>
+				</f:facet>
+			</p:panelGrid>
+		</p:panel>
+		<div class="rodape">
+
+			<h:outputText style="margin-top: -4px;font-size:12px;"
+				value="6º Período/Estágio Supervisionado" />
+			<br />
+			<h:outputText style="font-size:14px;margin-right: 16px;"
+				value="Sistemas de Informação" />
+		</div>
 	</h:form>
 </h:body>
 

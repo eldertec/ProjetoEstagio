@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<link rel="stylesheet" type="text/css" href="resources/css/estilo.css" />
+	<title>Cursos</title>
+</h:head>
+
+<h:body>
+	<h:form>
+		<p:growl />
+		<p:menubar>
+			<p:menuitem value="Home" url="index.xhtml" icon="ui-icon-home" />
+			<p:menuitem value="Alunos" url="cadastroAluno.xhtml"
+				icon="ui-icon-pencil" />
+		</p:menubar>
+		<p:panel id="basic" header="Cadastro de Curso"
+			footer="Faculdade Delta" style="margin-bottom:20px">
+			<p:panelGrid columns="2">
+				<f:facet name="header">
+					<p:outputLabel value="Preencha as informações do curso" />
+				</f:facet>
+				<p:outputLabel for="nome" value="Nome do Curso: " />
+				<p:inputText id="nome" value="#{cursoController.curso.nome}"
+					required="true"
+					requiredMessage="O campo Nome do curso é obrigatório." />
+				<p:outputLabel for="desc" value="Descrição do Curso: " />
+				<p:inputTextarea id="desc" rows="3" cols="20"
+					value="#{cursoController.curso.descricao}" required="true"
+					requiredMessage="O campo Descrição do curso é obrigatório." />
+				<p:outputLabel for="local" value="Local do Curso: " />
+				<p:inputText id="local" value="#{cursoController.curso.local}" required="true"
+					requiredMessage="O campo Local do curso é obrigatório." />
+				<p:outputLabel for="data" value="Data do Curso: " />
+				<p:calendar id="data" mask="true" pattern="dd/MM/yyyy"
+					navigator="true" timeZone="America/Sao_Paulo"
+					value="#{cursoController.curso.data}" required="true"
+					requiredMessage="O campo Data do curso é obrigatório." />
+				<p:outputLabel for="hora" value="Hora do Curso: " />
+				<p:inputText id="hora" value="#{cursoController.curso.hora}"
+					required="true"
+					requiredMessage="O campo Hora do curso é obrigatório." />
+				<p:outputLabel for="dura" value="Duração do Curso: " />
+				<p:inputText id="dura" value="#{cursoController.curso.duracao}"
+					required="true"
+					requiredMessage="O campo Duração do curso é obrigatório." />
+				<p:outputLabel for="valor" value="Valor do Curso: " />
+				<p:inputText id="valor" value="#{cursoController.curso.valor}"
+					required="true"
+					requiredMessage="O campo Valor do Curso é obrigatório.">
+				</p:inputText>
+				<p:outputLabel for="inst" value="Instrutor: " />
+				<p:inputText id="inst" value="#{cursoController.curso.instrutor}"
+					required="true" requiredMessage="O campo Instrutor é obrigatório.">
+				</p:inputText>
+				<f:facet name="footer">
+					<div class="botao">
+						<p:commandButton value="Cancelar"
+							action="#{cursoController.limpar}" ajax="false" immediate="true"
+							icon="ui-icon-circle-close"
+							style="background: #FF0000;color: #ffffff;" />
+						<p:commandButton value="Salvar" action="#{cursoController.salvar}"
+							ajax="false" icon="ui-icon-circle-check"
+							style="background: #006400;color: #ffffff;" />
+					</div>
+				</f:facet>
+			</p:panelGrid>
+		</p:panel>
+
+		<div class="rodape">
+
+			<h:outputText style="margin-top: -4px;font-size:12px;"
+				value="6º Período/Estágio Supervisionado" />
+			<br />
+			<h:outputText style="font-size:14px;margin-right: 16px;"
+				value="Sistemas de Informação" />
+		</div>
+	</h:form>
+</h:body>
+</html>
