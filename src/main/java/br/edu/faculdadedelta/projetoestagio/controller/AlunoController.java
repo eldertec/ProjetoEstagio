@@ -1,5 +1,8 @@
 package br.edu.faculdadedelta.projetoestagio.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -46,13 +49,35 @@ public class AlunoController {
 	}
 
 	public String salvar() {
-		usuario.setLogin(usuario.getEmail());
-		usuarioRepository.save(usuario);
-		aluno.setUsuario(usuario);
-		alunoRepository.save(aluno);
-		limpar();
-		FacesUtil.exibirMsg("Cadastro realizado com sucesso!");
+		if(aluno.getId() == null) {
+			usuario.setLogin(aluno.getEmail());
+			usuarioRepository.save(usuario);
+			aluno.setUsuario(usuario);
+			alunoRepository.save(aluno);
+			limpar();
+			FacesUtil.exibirMsg("Cadastro realizado com sucesso!");
+		}else {
+			alunoRepository.save(aluno);
+			FacesUtil.exibirMsg("Cadastro atualizado com sucesso!");
+		}
 		return "cadastroAluno.xhtml";
+	}
+	
+	public String atualizar() {
+		return "";
+	}
+	
+	public String remover() {
+		alunoRepository.delete(aluno);
+		return "";
+	}
+	
+	public List<Aluno> getlistar(){
+		List<Aluno> alunos = new ArrayList<>();
+		
+		alunos = alunoRepository.findAll();
+		
+		return alunos;
 	}
 
 }

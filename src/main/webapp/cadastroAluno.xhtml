@@ -25,7 +25,7 @@
 					<p:outputLabel value="Preencha seus dados" />
 				</f:facet>
 				<p:outputLabel for="nome" value="Nome: " />
-				<p:inputText id="nome" value="#{alunoController.usuario.nome}"
+				<p:inputText id="nome" value="#{alunoController.aluno.nome}"
 					required="true"
 					requiredMessage="O nome do aluno deve ser informado"
 					validatorMessage="O nome deve ter no máximo 100 caracteres"
@@ -41,14 +41,14 @@
 					<f:validateLength maximum="10" />
 				</p:inputText>
 				<p:outputLabel for="cpf" value="CPF: " />
-				<p:inputText id="cpf" value="#{alunoController.usuario.cpf}"
+				<p:inputText id="cpf" value="#{alunoController.aluno.cpf}"
 					label="CPF: " />
 				<p:outputLabel for="email" value="Email: " />
-				<p:inputText id="email" value="#{alunoController.usuario.email}"
+				<p:inputText id="email" value="#{alunoController.aluno.email}"
 					label="Email: " required="true" requiredMessage="Informe seu email" />
 				<p:outputLabel for="dtn" value="Data de Nascimento: " />
 				<p:calendar id="dtn"
-					value="#{alunoController.usuario.dataNascimento}" required="true"
+					value="#{alunoController.aluno.dataNascimento}" required="true"
 					requiredMessage="A data de nascimento do aluno deve ser informada"
 					label="Data de Nascimento: ">
 					<f:convertDateTime pattern="dd/MM/yyyy"

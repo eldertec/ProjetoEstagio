@@ -1,11 +1,14 @@
 package br.edu.faculdadedelta.projetoestagio.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Instrutor implements Serializable {
@@ -17,6 +20,9 @@ public class Instrutor implements Serializable {
 	private String nome;
 	private String descricao;
 	private String contato;
+
+	@OneToMany(mappedBy = "instrutor")
+	private List<Curso> cursos = new ArrayList<>();
 
 	public Instrutor() {
 		super();
@@ -60,6 +66,14 @@ public class Instrutor implements Serializable {
 
 	public void setContato(String contato) {
 		this.contato = contato;
+	}
+
+	public List<Curso> getCursos() {
+		return cursos;
+	}
+
+	public void setCursos(List<Curso> cursos) {
+		this.cursos = cursos;
 	}
 
 	@Override

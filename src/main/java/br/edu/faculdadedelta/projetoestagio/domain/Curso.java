@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Curso implements Serializable {
@@ -22,14 +24,18 @@ public class Curso implements Serializable {
 	private String hora;
 	private String duracao;
 	private Double valor;
-	private String instrutor;
+	private Integer qtdVaga;
+
+	@ManyToOne
+	@JoinColumn(name = "instrutor_id")
+	private Instrutor instrutor;
 
 	public Curso() {
 		super();
 	}
 
 	public Curso(Long id, String nome, String descricao, String local, Date data, String hora, String duracao,
-			Double valor, String instrutor) {
+			Double valor, Instrutor instrutor, Integer qtdVaga) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -40,6 +46,7 @@ public class Curso implements Serializable {
 		this.duracao = duracao;
 		this.valor = valor;
 		this.instrutor = instrutor;
+		this.qtdVaga = qtdVaga;
 	}
 
 	public Long getId() {
@@ -106,12 +113,20 @@ public class Curso implements Serializable {
 		this.valor = valor;
 	}
 
-	public String getInstrutor() {
+	public Instrutor getInstrutor() {
 		return instrutor;
 	}
 
-	public void setInstrutor(String instrutor) {
+	public void setInstrutor(Instrutor instrutor) {
 		this.instrutor = instrutor;
+	}
+
+	public Integer getQtdVaga() {
+		return qtdVaga;
+	}
+
+	public void setQtdVaga(Integer qtdVaga) {
+		this.qtdVaga = qtdVaga;
 	}
 
 	@Override
