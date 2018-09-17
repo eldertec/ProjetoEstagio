@@ -1,6 +1,7 @@
 package br.edu.faculdadedelta.projetoestagio.domain;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,8 +17,12 @@ public class Aluno implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	private String nome;
+	private String email;
 	private String matricula;
-	
+	private String cpf;
+	private Date dataNascimento;
+
 	@OneToOne
 	@JoinColumn(name = "fk_user")
 	private Usuario usuario;
@@ -26,10 +31,15 @@ public class Aluno implements Serializable {
 		super();
 	}
 
-	public Aluno(Long id, String matricula, Usuario usuario) {
+	public Aluno(Long id, String nome, String email, String matricula, String cpf, Date dataNascimento,
+			Usuario usuario) {
 		super();
 		this.id = id;
+		this.nome = nome;
+		this.email = email;
 		this.matricula = matricula;
+		this.cpf = cpf;
+		this.dataNascimento = dataNascimento;
 		this.usuario = usuario;
 	}
 
@@ -55,6 +65,38 @@ public class Aluno implements Serializable {
 
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+
+	public Date getDataNascimento() {
+		return dataNascimento;
+	}
+
+	public void setDataNascimento(Date dataNascimento) {
+		this.dataNascimento = dataNascimento;
 	}
 
 	@Override

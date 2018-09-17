@@ -1,40 +1,44 @@
 package br.edu.faculdadedelta.projetoestagio.domain;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
-public class Usuario implements Serializable {
+public class Usuario implements UserDetails, Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String nome;
-	private String email;
 	private String login;
 	private String senha;
-	private String cpf;
-	private Date dataNascimento;
+
+	@ManyToMany
+	@JoinTable(name = "usuarios_roles", joinColumns = @JoinColumn(name = "usuario_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "role"))
+	private List<Role> roles = new ArrayList<>();
 
 	public Usuario() {
 		super();
 	}
 
-	public Usuario(Long id, String nome, String email, String login, String senha, String cpf, Date dataNascimento) {
+	public Usuario(Long id, String login, String senha) {
 		super();
 		this.id = id;
-		this.nome = nome;
-		this.email = email;
 		this.login = login;
 		this.senha = senha;
-		this.cpf = cpf;
-		this.dataNascimento = dataNascimento;
 	}
 
 	public Long getId() {
@@ -43,22 +47,6 @@ public class Usuario implements Serializable {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
 	}
 
 	public String getLogin() {
@@ -77,20 +65,54 @@ public class Usuario implements Serializable {
 		this.senha = senha;
 	}
 
-	public String getCpf() {
-		return cpf;
+	public List<Role> getRoles() {
+		return roles;
 	}
 
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
 	}
 
-	public Date getDataNascimento() {
-		return dataNascimento;
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+
+		return this.roles;
 	}
 
-	public void setDataNascimento(Date dataNascimento) {
-		this.dataNascimento = dataNascimento;
+	@Override
+	public String getPassword() {
+		// TODO Auto-generated method stub
+		return this.senha;
+	}
+
+	@Override
+	public String getUsername() {
+		// TODO Auto-generated method stub
+		return this.login;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		// TODO Auto-generated method stub
+		return true;
 	}
 
 	@Override

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import br.edu.faculdadedelta.projetoestagio.domain.Role;
 import br.edu.faculdadedelta.projetoestagio.domain.Usuario;
@@ -27,11 +28,13 @@ public class ProjetoEstagioApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-		Usuario usuario = new Usuario(null, null, null, "admin", "admin", null, null);
+		Usuario usuario = new Usuario(null, "admin",new BCryptPasswordEncoder().encode("admin"));
 
-		Role role = new Role(null, "Administrador", usuario);
+		Role role = new Role("ROLE_ADMIN");
+		usuario.getRoles().addAll(Arrays.asList(role));
 
-		usuarioRepository.saveAll(Arrays.asList(usuario));
 		roleRepository.saveAll(Arrays.asList(role));
+		usuarioRepository.saveAll(Arrays.asList(usuario));
+		
 	}
 }
