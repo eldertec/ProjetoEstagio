@@ -1,6 +1,7 @@
 package br.edu.faculdadedelta.projetoestagio.controller;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.annotation.SessionScope;
 
 import br.edu.faculdadedelta.projetoestagio.domain.Aluno;
+import br.edu.faculdadedelta.projetoestagio.domain.Role;
 import br.edu.faculdadedelta.projetoestagio.domain.Usuario;
 import br.edu.faculdadedelta.projetoestagio.repositories.AlunoRepository;
+import br.edu.faculdadedelta.projetoestagio.repositories.RoleRepository;
 import br.edu.faculdadedelta.projetoestagio.repositories.UsuarioRepository;
 import br.edu.faculdadedelta.projetoestagio.util.FacesUtil;
 
@@ -25,6 +28,11 @@ public class AlunoController {
 	private AlunoRepository alunoRepository;
 	@Autowired
 	private UsuarioRepository usuarioRepository;
+	@Autowired
+	private RoleRepository roleRepository;
+	
+	private Role role = new Role("ROLE_ALUNO");
+	
 
 	public Aluno getAluno() {
 		return aluno;
@@ -50,7 +58,9 @@ public class AlunoController {
 
 	public String salvar() {
 		if(aluno.getId() == null) {
+			roleRepository.saveAll(Arrays.asList(role));
 			usuario.setLogin(aluno.getEmail());
+			usuario.getRoles().addAll(Arrays.asList(role));
 			usuarioRepository.save(usuario);
 			aluno.setUsuario(usuario);
 			alunoRepository.save(aluno);

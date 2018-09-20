@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 public class Curso implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -20,6 +22,8 @@ public class Curso implements Serializable {
 	private String nome;
 	private String descricao;
 	private String local;
+	
+	@DateTimeFormat(pattern="dd/MM/yyyy")
 	private Date data;
 	private String hora;
 	private String duracao;
@@ -35,7 +39,7 @@ public class Curso implements Serializable {
 	}
 
 	public Curso(Long id, String nome, String descricao, String local, Date data, String hora, String duracao,
-			Double valor, Instrutor instrutor, Integer qtdVaga) {
+			Double valor, Integer qtdVaga, Instrutor instrutor) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -45,8 +49,8 @@ public class Curso implements Serializable {
 		this.hora = hora;
 		this.duracao = duracao;
 		this.valor = valor;
-		this.instrutor = instrutor;
 		this.qtdVaga = qtdVaga;
+		this.instrutor = instrutor;
 	}
 
 	public Long getId() {
