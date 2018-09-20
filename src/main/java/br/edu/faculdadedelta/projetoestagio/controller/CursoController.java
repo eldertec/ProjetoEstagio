@@ -3,6 +3,7 @@ package br.edu.faculdadedelta.projetoestagio.controller;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,8 +27,11 @@ public class CursoController {
 	@Autowired
 	private InstrutorRepository instrutorRepository;
 
-	@Autowired
-	private Instrutor instrutorSelecionado;
+	private Long idSelecionado;
+
+	private Instrutor instrutorSelecionado = new Instrutor();
+
+	private Optional<Instrutor> instrutor = Optional.empty();
 
 	private Curso curso = new Curso();
 
@@ -37,6 +41,22 @@ public class CursoController {
 
 	public void setCurso(Curso curso) {
 		this.curso = curso;
+	}
+
+	public Long getIdSelecionado() {
+		return idSelecionado;
+	}
+
+	public void setIdSelecionado(Long idSelecionado) {
+		this.idSelecionado = idSelecionado;
+	}
+
+	public Optional<Instrutor> getInstrutor() {
+		return instrutor;
+	}
+
+	public void setInstrutor(Optional<Instrutor> instrutor) {
+		this.instrutor = instrutor;
 	}
 
 	public Instrutor getInstrutorSelecionado() {
@@ -49,10 +69,17 @@ public class CursoController {
 
 	public String limpar() {
 		curso = new Curso();
+		idSelecionado = (long) 0;
 		return "cadastroCurso.xhtml";
 	}
 
+	public Instrutor retornaInstrutor(Long id) {
+		instrutor = instrutorRepository.findById(id);
+		return instrutor.get();
+	}
+
 	public String salvar() {
+		instrutorSelecionado = retornaInstrutor(idSelecionado);
 		if (curso.getId() == null) {
 			curso.setInstrutor(instrutorSelecionado);
 			cursoRepository.save(curso);
@@ -67,18 +94,20 @@ public class CursoController {
 			instrutorRepository.save(instrutorSelecionado);
 			limpar();
 			FacesUtil.exibirMsg("Curso atualizado com sucesso!");
+
 		}
 		return "cadastroCurso.xhtml";
 	}
 
 	public String atualizar() {
-		instrutorSelecionado = curso.getInstrutor();
+		idSelecionado = curso.getInstrutor().getId();
 		return "cadastroCurso.xhtml";
 	}
 
 	public String remover() {
 		cursoRepository.delete(curso);
-		return "listaCurso.xhtml";
+		limpar();
+		return "cadastroCurso.xhtml";
 	}
 
 	public List<Curso> getListar() {
