@@ -9,23 +9,117 @@
 	<title>Faculdade Delta</title>
 </h:head>
 <h:body>
-	<h:form>
-		<p:menubar>
-			<p:menuitem value="Home" url="index.xhtml" icon="ui-icon-home" />
-			<p:menuitem value="Alunos" url="cadastroAluno.xhtml"
-				icon="ui-icon-pencil" />
-			<p:menuitem value="Cursos" url="cadastroCurso.xhtml"
-				icon="ui-icon-note" />
-			<p:menuitem value="Usuários" url="cadastroUsuario.xhtml"
-				icon="ui-icon-note" />
-		</p:menubar>
-		<div class="rodape">
-			<h:outputText style="margin-top: -4px;font-size:12px;"
-				value="6º Período/Estágio Supervisionado" />
-			<br />
-			<h:outputText style="font-size:14px;margin-right: 16px;"
-				value="Sistemas de Informação" />
+
+	<div class="p-grid sample-layout">
+		<div class="p-col-12 p-col-nogutter">
+			<p:menubar>
+
+			</p:menubar>
 		</div>
-	</h:form>
+		<div class="p-col-12 p-md-3">
+			<div class="p-grid">
+				<div class="p-col-12"></div>
+			</div>
+		</div>
+		<div class="p-col-12 p-md-6">
+			<div class="p-grid">
+				<div class="p-col-12">
+					<h:form>
+						<p:panelGrid columns="2" style="margin:auto;">
+							<f:facet name="header">
+								<h:outputText value="Login" />
+							</f:facet>
+							<p:outputLabel value="Email:" for="email" />
+							<p:inputText id="email" required="true" />
+							<p:outputLabel value="Senha:" for="senha" />
+							<p:password id="senha" required="true" />
+							<f:facet name="footer">
+								<div style="text-align: right; padding: 5px;">
+									<p:commandButton value="Cadastrar" type="button"
+										onclick="PF('login').show();" icon="ui-icon-plus"
+										style="background: #0000CD;color:#ffffff;" />
+									<p:commandButton value="Entrar" ajax="false"
+										icon="ui-icon-play" style="background: #339933;color:#ffffff;" />
+								</div>
+							</f:facet>
+
+						</p:panelGrid>
+					</h:form>
+
+					<h:form>
+					<p:growl />
+						<p:dialog header="Cadastro" widgetVar="login" modal="true">
+							<p:panelGrid columns="2">
+								<f:facet name="header">
+									<p:outputLabel value="Preencha seus dados" />
+								</f:facet>
+								<p:outputLabel for="nome" value="Nome: " />
+								<p:inputText id="nome" value="#{alunoController.aluno.nome}"
+									required="true"
+									requiredMessage="O nome do aluno deve ser informado"
+									validatorMessage="O nome deve ter no máximo 100 caracteres"
+									label="Nome: ">
+									<f:validateLength maximum="100" />
+								</p:inputText>
+								<p:outputLabel for="mat" value="Matrícula: " />
+								<p:inputText id="mat" value="#{alunoController.aluno.matricula}"
+									required="true"
+									requiredMessage="O número da matrícula do aluno deve ser informado"
+									validatorMessage="O número da matrícula deve ter no máximo 10 caracteres"
+									label="Matrícula: ">
+									<f:validateLength maximum="10" />
+								</p:inputText>
+								<p:outputLabel for="cpf" value="CPF: " />
+								<p:inputMask id="cpf" value="#{alunoController.aluno.cpf}"
+									label="CPF: " mask="999.999.999-99"/>
+								<p:outputLabel for="email" value="Email: " />
+								<p:inputText id="email" value="#{alunoController.aluno.email}"
+									label="Email: " required="true"
+									requiredMessage="Informe seu email" />
+								<p:outputLabel for="dtn" value="Data de Nascimento: " />
+								<p:calendar id="dtn" pattern="dd/MM/yyyy" navigator="true"
+									timeZone="America/Sao_Paulo"
+									value="#{alunoController.aluno.dataNascimento}" required="true"
+									requiredMessage="A data de nascimento do aluno deve ser informada"
+									label="Data de Nascimento: " mask="true" />
+								<p:outputLabel for="senha" value="Senha: " />
+								<p:password id="senha" value="#{alunoController.usuario.senha}"
+									label="Senha: " required="true"
+									requiredMessage="Crie uma senha" />
+								<f:facet name="footer">
+									<div class="botao">
+										<p:commandButton value="Cancelar"
+											action="#{alunoController.limpar}" ajax="false"
+											immediate="true" icon="ui-icon-circle-close"
+											style="background: #FF0000;color: #ffffff;" />
+										<p:commandButton value="Salvar"
+											action="#{alunoController.salvar}" ajax="false"
+											icon="ui-icon-circle-check"
+											style="background: #006400;color: #ffffff;" />
+									</div>
+								</f:facet>
+							</p:panelGrid>
+						</p:dialog>
+					</h:form>
+				</div>
+			</div>
+		</div>
+		<div class="p-col-12 p-md-3">
+			<div class="p-grid">
+				<div class="p-col-12"></div>
+			</div>
+		</div>
+
+		<div class="p-col-12">
+			<div class="rodape">
+				<h:outputText style="margin-top: -4px;font-size:12px;"
+					value="6º Período/Estágio Supervisionado" />
+				<br />
+				<h:outputText style="font-size:14px;margin-right: 16px;"
+					value="Sistemas de Informação" />
+			</div>
+		</div>
+	</div>
+
 </h:body>
 </html>
