@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.annotation.SessionScope;
@@ -59,6 +60,7 @@ public class AlunoController {
 	public String salvar() {
 		if(aluno.getId() == null) {
 			roleRepository.saveAll(Arrays.asList(role));
+			usuario.setSenha(new BCryptPasswordEncoder().encode(usuario.getSenha()));
 			usuario.setLogin(aluno.getEmail());
 			usuario.getRoles().addAll(Arrays.asList(role));
 			usuarioRepository.save(usuario);
@@ -69,17 +71,19 @@ public class AlunoController {
 		}else {
 			alunoRepository.save(aluno);
 			FacesUtil.exibirMsg("Cadastro atualizado com sucesso!");
+			limpar();
 		}
-		return "cadastroAluno.xhtml";
+		return "index.xhtml";
 	}
 	
 	public String atualizar() {
-		return "";
+		return "cadastroAluno.xhtml";
 	}
 	
 	public String remover() {
 		alunoRepository.delete(aluno);
-		return "";
+		limpar();
+		return "listaAluno.xhtml";
 	}
 	
 	public List<Aluno> getlistar(){

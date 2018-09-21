@@ -28,17 +28,64 @@
 						icon="ui-icon-note" />
 				</p:menubar>
 			</div>
-			<div class="p-col-12 p-md-3 p-col-nogutter">
+			<div class="p-col-12 p-md-1 p-col-nogutter">
 				<div class="p-grid">
-					<div class="p-col-11">
-						Cadastro
+					<div class="p-col-12">
+						
 					</div>
 				</div>
 			</div>
-			<div class="p-col-12 p-md-9 p-col-nogutter">
+			<div class="p-col-12 p-md-10 p-col-nogutter">
 				<div class="p-grid">
 					<div class="p-col-12">
-						Listagem
+						<p:dataTable value="#{alunoController.listar}" var="a"
+							resizableColumns="true" emptyMessage="Nenhum Aluno Cadastrado">
+							<f:facet name="header">
+								<h:outputText value="Alunos Cadastrados" />
+							</f:facet>
+							<p:column headerText="Nome" style="text-align:center;">
+								<h:outputText value="#{a.nome}" />
+							</p:column>
+							<p:column headerText="Email" style="text-align:center;">
+								<h:outputText value="#{a.email}" />
+							</p:column>
+							<p:column headerText="Matrícula" style="text-align:center;">
+								<h:outputText value="#{a.matricula}" />
+							</p:column>
+							<p:column headerText="CPF" style="text-align:center;">
+								<h:outputText value="#{a.cpf}" />
+							</p:column>
+							<p:column headerText="Data de Nascimento" style="text-align:center;">
+								<h:outputText value="#{a.dataNascimento}">
+									<f:convertDateTime pattern="dd/MM/yyyy"
+										timeZone="America/Sao_Paulo" />
+								</h:outputText>
+							</p:column>
+							<p:column headerText="Ações" style="text-align:center;width:20%;">
+								<p:commandButton title="Editar" value="Editar"
+									action="#{alunoController.atualizar}" icon="ui ui-icon-pencil"
+									ajax="false" immediate="true" style="background: #000099;color:#ffffff">
+									<f:setPropertyActionListener value="#{a}"
+										target="#{alunoController.aluno}" />
+								</p:commandButton>
+								<p:commandButton title="Excluir" value="Excluir"
+									action="#{alunoController.remover}"
+									onclick="return confirm('Confirma a exclusão do Aluno #{a.nome} com Id = #{a.id} ?')"
+									icon="ui ui-icon-trash" ajax="false" immediate="true"
+									style="background: #ff0000;color:#ffffff">
+									<f:setPropertyActionListener value="#{a}"
+										target="#{alunoController.aluno}" />
+								</p:commandButton>
+							</p:column>
+						</p:dataTable>
+					</div>
+				</div>
+			</div>
+			
+			<div class="p-col-12 p-md-1 p-col-nogutter">
+				<div class="p-grid">
+					<div class="p-col-12">
+						
 					</div>
 				</div>
 			</div>

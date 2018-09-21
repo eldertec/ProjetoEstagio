@@ -33,6 +33,7 @@
 			<div class="p-grid">
 				<div class="p-col-12">
 					<h:form>
+						<p:growl />
 						<p:panelGrid columns="2">
 							<f:facet name="header">
 								<p:outputLabel value="Preencha as informações do curso" />
@@ -101,6 +102,7 @@
 			<div class="p-grid">
 				<div class="p-col-11">
 					<h:form id="form">
+						<p:growl />
 						<p:dataTable value="#{cursoController.listar}" var="c"
 							resizableColumns="true" emptyMessage="Nenhum Curso Cadastrado">
 							<f:facet name="header">
