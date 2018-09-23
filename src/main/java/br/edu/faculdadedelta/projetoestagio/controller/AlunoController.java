@@ -14,7 +14,6 @@ import br.edu.faculdadedelta.projetoestagio.domain.Aluno;
 import br.edu.faculdadedelta.projetoestagio.domain.Role;
 import br.edu.faculdadedelta.projetoestagio.domain.Usuario;
 import br.edu.faculdadedelta.projetoestagio.repositories.AlunoRepository;
-import br.edu.faculdadedelta.projetoestagio.repositories.RoleRepository;
 import br.edu.faculdadedelta.projetoestagio.repositories.UsuarioRepository;
 import br.edu.faculdadedelta.projetoestagio.util.FacesUtil;
 
@@ -29,8 +28,6 @@ public class AlunoController {
 	private AlunoRepository alunoRepository;
 	@Autowired
 	private UsuarioRepository usuarioRepository;
-	@Autowired
-	private RoleRepository roleRepository;
 	
 	private Role role = new Role("ROLE_ALUNO");
 	
@@ -59,7 +56,6 @@ public class AlunoController {
 
 	public String salvar() {
 		if(aluno.getId() == null) {
-			roleRepository.saveAll(Arrays.asList(role));
 			usuario.setSenha(new BCryptPasswordEncoder().encode(usuario.getSenha()));
 			usuario.setLogin(aluno.getEmail());
 			usuario.getRoles().addAll(Arrays.asList(role));

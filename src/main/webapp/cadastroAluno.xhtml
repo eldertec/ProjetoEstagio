@@ -7,22 +7,30 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core">
 
 <h:head>
-	<link rel="stylesheet" type="text/css" href="resources/css/estilo.css" />
+	<link rel="stylesheet" type="text/css"
+		href="resources/css/primeflex.css" />
+	<link rel="stylesheet" type="text/css"
+		href="resources/css/primeflex.scss" />
+		<link rel="stylesheet" type="text/css" href="resources/css/estilo.css" />
 	<title>Alunos</title>
 </h:head>
 <h:body>
 	<h:form>
 		<p:growl />
-		<p:menubar>
-			<p:menuitem value="Home" url="index.xhtml" icon="ui-icon-home" />
-			<p:menuitem value="Cursos" url="cadastroCurso.xhtml"
-				icon="ui-icon-note" />
-		</p:menubar>
-		<p:panel id="basic" header="Cadastro de Aluno"
-			footer="Faculdade Delta" style="margin-bottom:20px">
-			<p:panelGrid columns="2">
+		<div class="p-grid">
+			<div class="p-col-12 p-col-nogutter">
+				<p:menubar>
+					<p:menuitem value="Home" url="homeAluno.xhtml" icon="ui-icon-home" />
+					<p:menuitem value="Certificados" url="#"
+						icon="ui-icon-note" />
+				</p:menubar>
+			</div>
+			<div class="p-col-12 p-md-3 p-col-nogutter">
+				<div class="p-grid">
+					<div class="p-col-11">
+						<p:panelGrid columns="2">
 				<f:facet name="header">
-					<p:outputLabel value="Preencha seus dados" />
+					<p:outputLabel value="Atualize seus dados" />
 				</f:facet>
 				<p:outputLabel for="nome" value="Nome: " />
 				<p:inputText id="nome" value="#{alunoController.aluno.nome}"
@@ -45,7 +53,7 @@
 					label="CPF: " />
 				<p:outputLabel for="email" value="Email: " />
 				<p:inputText id="email" value="#{alunoController.aluno.email}"
-					label="Email: " required="true" requiredMessage="Informe seu email" />
+					label="Email: " required="true" requiredMessage="Informe seu email" readonly="true"/>
 				<p:outputLabel for="dtn" value="Data de Nascimento: " />
 				<p:calendar id="dtn"
 					value="#{alunoController.aluno.dataNascimento}" required="true"
@@ -63,20 +71,71 @@
 							action="#{alunoController.limpar}" ajax="false" immediate="true"
 							icon="ui-icon-circle-close"
 							style="background: #FF0000;color: #ffffff;" />
-						<p:commandButton value="Salvar" action="#{alunoController.salvar}"
+						<p:commandButton value="Atualizar" action="#{alunoController.salvar}"
 							ajax="false" icon="ui-icon-circle-check"
 							style="background: #006400;color: #ffffff;" />
 					</div>
 				</f:facet>
 			</p:panelGrid>
-		</p:panel>
-		<div class="rodape">
+					</div>
+				</div>
+			</div>
+			<div class="p-col-12 p-md-9 p-col-nogutter">
+				<div class="p-grid">
+					<div class="p-col-12">
+						<p:dataTable value="#{alunoController.listar}" var="a"
+							resizableColumns="true" emptyMessage="Nenhum Aluno Cadastrado" style="width:98.5%;">
+							<f:facet name="header">
+								<h:outputText value="Meus Dados" />
+							</f:facet>
+							<p:column headerText="Nome" style="text-align:center;">
+								<h:outputText value="#{a.nome}" />
+							</p:column>
+							<p:column headerText="Email" style="text-align:center;">
+								<h:outputText value="#{a.email}" />
+							</p:column>
+							<p:column headerText="Matrícula" style="text-align:center;">
+								<h:outputText value="#{a.matricula}" />
+							</p:column>
+							<p:column headerText="CPF" style="text-align:center;">
+								<h:outputText value="#{a.cpf}" />
+							</p:column>
+							<p:column headerText="Data de Nascimento" style="text-align:center;">
+								<h:outputText value="#{a.dataNascimento}">
+									<f:convertDateTime pattern="dd/MM/yyyy"
+										timeZone="America/Sao_Paulo" />
+								</h:outputText>
+							</p:column>
+							<p:column headerText="Ações" style="text-align:center;width:20%;">
+								<p:commandButton title="Editar" value="Editar"
+									action="#{alunoController.atualizar}" icon="ui ui-icon-pencil"
+									ajax="false" immediate="true" style="background: #000099;color:#ffffff">
+									<f:setPropertyActionListener value="#{a}"
+										target="#{alunoController.aluno}" />
+								</p:commandButton>
+								<p:commandButton title="Excluir" value="Excluir"
+									action="#{alunoController.remover}"
+									onclick="return confirm('Confirma a exclusão do Aluno #{a.nome} com Id = #{a.id} ?')"
+									icon="ui ui-icon-trash" ajax="false" immediate="true"
+									style="background: #ff0000;color:#ffffff">
+									<f:setPropertyActionListener value="#{a}"
+										target="#{alunoController.aluno}" />
+								</p:commandButton>
+							</p:column>
+						</p:dataTable>
+					</div>
+				</div>
+			</div>
 
-			<h:outputText style="margin-top: -4px;font-size:12px;"
-				value="6º Período/Estágio Supervisionado" />
-			<br />
-			<h:outputText style="font-size:14px;margin-right: 16px;"
-				value="Sistemas de Informação" />
+			<div class="p-col-12">
+				<div class="rodape">
+					<h:outputText style="margin-top: -4px;font-size:12px;"
+						value="6º Período/Estágio Supervisionado" />
+					<br />
+					<h:outputText style="font-size:14px;margin-right: 16px;"
+						value="Sistemas de Informação" />
+				</div>
+			</div>
 		</div>
 	</h:form>
 </h:body>

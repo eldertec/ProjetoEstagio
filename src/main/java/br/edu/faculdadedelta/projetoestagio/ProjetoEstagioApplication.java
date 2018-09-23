@@ -12,14 +12,11 @@ import br.edu.faculdadedelta.projetoestagio.domain.Instrutor;
 import br.edu.faculdadedelta.projetoestagio.domain.Role;
 import br.edu.faculdadedelta.projetoestagio.domain.Usuario;
 import br.edu.faculdadedelta.projetoestagio.repositories.InstrutorRepository;
-import br.edu.faculdadedelta.projetoestagio.repositories.RoleRepository;
 import br.edu.faculdadedelta.projetoestagio.repositories.UsuarioRepository;
 
 @SpringBootApplication
 public class ProjetoEstagioApplication implements CommandLineRunner {
 
-	@Autowired
-	private RoleRepository roleRepository;
 	@Autowired
 	private UsuarioRepository usuarioRepository;
 	@Autowired
@@ -37,7 +34,6 @@ public class ProjetoEstagioApplication implements CommandLineRunner {
 		Role role = new Role("ROLE_ADMIN");
 		usuario.getRoles().addAll(Arrays.asList(role));
 
-		roleRepository.saveAll(Arrays.asList(role));
 		usuarioRepository.saveAll(Arrays.asList(usuario));
 
 		Instrutor i1 = new Instrutor(null, "Paulo Roberto", "Spring MVC", "paulonill@gmail.com");
