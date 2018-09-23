@@ -20,8 +20,9 @@
 	<div class="p-grid">
 		<div class="p-col-12 p-col-nogutter">
 			<p:menubar>
-				<p:menuitem value="Home" url="home.xhtml" icon="ui-icon-home" />
-				<p:menuitem value="Alunos" url="listaAluno.xhtml"
+				<p:menuitem value="Home" url="homeCoordenador.xhtml"
+					icon="ui-icon-home" />
+				<p:menuitem value="Cursos" url="cadastroCurso.xhtml"
 					icon="ui-icon-note" />
 			</p:menubar>
 		</div>
@@ -47,17 +48,9 @@
 								value="#{utilizadorController.usuario.login}" required="true"
 								requiredMessage="O email do usuário deve ser informado"
 								validatorMessage="O email deve ter no máximo 100 caracteres"
-								label="Email: ">
+								label="Email: " readonly="true">
 								<f:validateLength maximum="100" />
 							</p:inputText>
-							<p:outputLabel value="Tipo de Usuário: " for="tipo" />
-							<p:selectOneMenu id="tipo" required="true"
-								requiredMessage="Selecione o Tipo de Usuário!"
-								value="#{utilizadorController.utilizador.tipo}">
-								<f:selectItem itemLabel="SELECIONE" />
-								<f:selectItems value="#{utilizadorController.tipos}" var="t"
-									itemLabel="#{t.descricao}" itemValue="#{t}" />
-							</p:selectOneMenu>
 							<p:outputLabel for="senha" value="Senha: " />
 							<p:password id="senha"
 								value="#{utilizadorController.usuario.senha}" required="true"
@@ -87,7 +80,7 @@
 				<div class="p-col-12">
 					<h:form data-js="tabela">
 						<p:dataTable value="#{utilizadorController.listar}" var="u"
-							resizableColumns="true" emptyMessage="Nenhum Usuário Cadastrado" style="width:98.5%;">
+							resizableColumns="true" emptyMessage="Nenhum Usuário Cadastrado">
 							<f:facet name="header">
 								<h:outputText value="Usuários" />
 							</f:facet>

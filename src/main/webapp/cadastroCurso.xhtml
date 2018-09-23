@@ -17,15 +17,11 @@
 </h:head>
 <h:body>
 
-	<div class="p-grid sample-layout">
+	<div class="p-grid">
 		<div class="p-col-12 p-col-nogutter">
 			<p:menubar>
-				<p:menuitem value="Home" url="index.xhtml" icon="ui-icon-home" />
-				<p:menuitem value="Alunos" url="cadastroAluno.xhtml"
-					icon="ui-icon-pencil" />
-				<p:menuitem value="Cursos" url="cadastroCurso.xhtml"
-					icon="ui-icon-note" />
-				<p:menuitem value="Usuários" url="cadastroUsuario.xhtml"
+				<p:menuitem value="Home" url="homeCoordenador.xhtml" icon="ui-icon-home" />
+				<p:menuitem value="Meus Dados" url="cadastroUsuarioLogado.xhtml"
 					icon="ui-icon-note" />
 			</p:menubar>
 		</div>
@@ -100,11 +96,11 @@
 
 		<div class="p-col-12 p-md-9 p-col-nogutter">
 			<div class="p-grid">
-				<div class="p-col-11">
+				<div class="p-col-12">
 					<h:form id="form">
 						<p:growl />
 						<p:dataTable value="#{cursoController.listar}" var="c"
-							resizableColumns="true" emptyMessage="Nenhum Curso Cadastrado">
+							resizableColumns="true" emptyMessage="Nenhum Curso Cadastrado" style="width:98.5%;">
 							<f:facet name="header">
 								<h:outputText value="Cursos Cadastrados" />
 							</f:facet>

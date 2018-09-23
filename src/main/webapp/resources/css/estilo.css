@@ -7,7 +7,6 @@
 
  .box,
     .sample-layout > div {
-        background-color: #cce4f7;
         text-align: center;
         padding-top: 1em;
         padding-bottom: 1em;
@@ -29,7 +28,6 @@
     .vertical-container {
         margin: 0;
         height: 200px;
-        background: #efefef;
         border-radius: 4px;
     }
  

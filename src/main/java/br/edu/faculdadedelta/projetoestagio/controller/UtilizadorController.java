@@ -5,16 +5,17 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.annotation.SessionScope;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.edu.faculdadedelta.projetoestagio.domain.Role;
 import br.edu.faculdadedelta.projetoestagio.domain.Usuario;
 import br.edu.faculdadedelta.projetoestagio.domain.Utilizador;
 import br.edu.faculdadedelta.projetoestagio.domain.enums.TipoUtilizador;
-import br.edu.faculdadedelta.projetoestagio.repositories.RoleRepository;
 import br.edu.faculdadedelta.projetoestagio.repositories.UsuarioRepository;
 import br.edu.faculdadedelta.projetoestagio.repositories.UtilizadorRepository;
 import br.edu.faculdadedelta.projetoestagio.util.FacesUtil;
@@ -28,8 +29,6 @@ public class UtilizadorController {
 	private UtilizadorRepository repo;
 	@Autowired
 	private UsuarioRepository usuarioRepository;
-	@Autowired
-	private RoleRepository roleRepository;
 
 	private Role role = new Role();
 
@@ -78,7 +77,6 @@ public class UtilizadorController {
 				role.setRole("ROLE_FUNCIONARIO");
 			}
 			usuario.setSenha(new BCryptPasswordEncoder().encode(usuario.getSenha()));
-			roleRepository.saveAll(Arrays.asList(role));
 			usuario.getRoles().addAll(Arrays.asList(role));
 			usuarioRepository.save(usuario);
 			utilizador.setUsuario(usuario);
@@ -101,6 +99,7 @@ public class UtilizadorController {
 
 	public String remover() {
 		repo.delete(utilizador);
+		usuarioRepository.delete(utilizador.getUsuario());
 		FacesUtil.exibirMsg("Cadastro removido com sucesso!");
 		limpar();
 		return "cadastroUsuario.xhtml";
@@ -115,5 +114,12 @@ public class UtilizadorController {
 	public TipoUtilizador[] getTipos() {
 		return TipoUtilizador.values();
 	}
+	
+	public Usuario getUsuarioLogado(@AuthenticationPrincipal Usuario logado, RedirectAttributes model){
+		  return logado;
+		}
+	
+	
+
 
 }

@@ -16,23 +16,17 @@
 </h:head>
 <h:body>
 	<h:form>
-		<div class="p-grid sample-layout">
+		<div class="p-grid">
 			<div class="p-col-12 p-col-nogutter">
 				<p:menubar>
-					<p:menuitem value="Home" url="index.xhtml" icon="ui-icon-home" />
-					<p:menuitem value="Alunos" url="cadastroAluno.xhtml"
+					<p:menuitem value="Home" url="home.xhtml" icon="ui-icon-home" />
+					<p:menuitem value="Usuarios" url="cadastroUsuario.xhtml"
 						icon="ui-icon-pencil" />
-					<p:menuitem value="Cursos" url="cadastroCurso.xhtml"
-						icon="ui-icon-note" />
-					<p:menuitem value="Usuários" url="cadastroUsuario.xhtml"
-						icon="ui-icon-note" />
 				</p:menubar>
 			</div>
 			<div class="p-col-12 p-md-1 p-col-nogutter">
 				<div class="p-grid">
-					<div class="p-col-12">
-						
-					</div>
+					<div class="p-col-12"></div>
 				</div>
 			</div>
 			<div class="p-col-12 p-md-10 p-col-nogutter">
@@ -55,19 +49,14 @@
 							<p:column headerText="CPF" style="text-align:center;">
 								<h:outputText value="#{a.cpf}" />
 							</p:column>
-							<p:column headerText="Data de Nascimento" style="text-align:center;">
+							<p:column headerText="Data de Nascimento"
+								style="text-align:center;">
 								<h:outputText value="#{a.dataNascimento}">
 									<f:convertDateTime pattern="dd/MM/yyyy"
 										timeZone="America/Sao_Paulo" />
 								</h:outputText>
 							</p:column>
 							<p:column headerText="Ações" style="text-align:center;width:20%;">
-								<p:commandButton title="Editar" value="Editar"
-									action="#{alunoController.atualizar}" icon="ui ui-icon-pencil"
-									ajax="false" immediate="true" style="background: #000099;color:#ffffff">
-									<f:setPropertyActionListener value="#{a}"
-										target="#{alunoController.aluno}" />
-								</p:commandButton>
 								<p:commandButton title="Excluir" value="Excluir"
 									action="#{alunoController.remover}"
 									onclick="return confirm('Confirma a exclusão do Aluno #{a.nome} com Id = #{a.id} ?')"
@@ -81,12 +70,10 @@
 					</div>
 				</div>
 			</div>
-			
+
 			<div class="p-col-12 p-md-1 p-col-nogutter">
 				<div class="p-grid">
-					<div class="p-col-12">
-						
-					</div>
+					<div class="p-col-12"></div>
 				</div>
 			</div>
 

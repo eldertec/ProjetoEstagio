@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
@@ -17,7 +18,7 @@ public class Role implements GrantedAuthority, Serializable {
 	@Id
 	private String role;
 
-	@ManyToMany(mappedBy = "roles")
+	@ManyToMany(mappedBy = "roles", cascade = CascadeType.ALL)
 	private List<Usuario> usuarios = new ArrayList<>();
 
 	public Role() {

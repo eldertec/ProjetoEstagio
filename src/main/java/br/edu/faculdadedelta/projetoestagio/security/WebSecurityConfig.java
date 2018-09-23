@@ -30,8 +30,25 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.csrf().disable().authorizeRequests().antMatchers(HttpMethod.GET, "/").permitAll().anyRequest()
-				.authenticated().and().formLogin().permitAll().and().logout()
+		http
+		.csrf()
+		.disable()
+		.authorizeRequests().antMatchers(HttpMethod.GET, "/").permitAll()
+		/*.antMatchers("/cadastroCurso").hasRole("COORDENADOR")
+		.antMatchers("/cadastroUsuario").hasRole("ADMIN")
+		.antMatchers("/cadastroUsuarioLogado").hasRole("COORDENADOR")
+		.antMatchers("/cadastroAluno").hasRole("ALUNO")
+		.antMatchers("/listaAluno").hasRole("ADMIN")
+		.antMatchers("/home").hasRole("ADMIN")
+		.antMatchers("/homeAluno").hasRole("ALUNO")
+		.antMatchers("/homeCoordenador").hasRole("COORDENADOR")*/
+		.anyRequest()
+				.authenticated()
+				.and().formLogin()
+				/*.loginPage("/login")
+                .usernameParameter("login")
+                .passwordParameter("senha")*/.permitAll()
+				.and().logout()
 				.logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
 	}
 
