@@ -11,4 +11,9 @@ public class MainController {
 	public String index() {
 		return "index.xhtml";
 	}
+	
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public String logar() {
+		return "/logout";
+	}
 }

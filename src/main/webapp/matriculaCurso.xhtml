@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<link rel="stylesheet" type="text/css" href="resources/css/estilo.css" />
+	<title>Matricula de Cursos</title>
+</h:head>
+<h:body>
+	<h:form>
+		<p:growl />
+		<p:menubar>
+			<p:menuitem value="Home" url="index.xhtml" icon="ui-icon-home" />
+		</p:menubar>
+		<p:panel id="basic" header="Cadastro de Curso com Matricula"
+			footer="Faculdade Delta" style="margin-bottom:15px">
+			<p:panelGrid columns="2">
+				<f:facet name="header">
+					<p:outputLabel value="Realize a matricula nos cursos" />
+				</f:facet>
+				<p:outputLabel for="nome" value="Nome do Curso: " />
+				<p:inputText id="nome" value="#{cursoController.curso.nome}"
+					required="true"
+					requiredMessage="O campo Nome do curso é obrigatório." />
+				<p:outputLabel for="mat" value="Matricula do aluno: " />
+				<p:inputText id="mat" value="#{alunoController.aluno.matricula}"
+					required="true"
+					requiredMessage="O Campo matricula do aluno é obrigatório!" />
+				<f:facet name="footer">
+					<div class="botao">
+						<p:commandButton value="Cancelar"
+							action="#{alunoController.limpar}" ajax="false" immediate="true"
+							icon="ui-icon-circle-close"
+							style="background: #FF0000;color: #ffffff;" />
+						<p:commandButton value="Salvar" action="#{alunoController.salvar}"
+							ajax="false" icon="ui-icon-circle-check"
+							style="background: #006400;color: #ffffff;" />
+					</div>
+				</f:facet>
+			</p:panelGrid>
+		</p:panel>
+		<div class="rodape">
+			<h:outputText style="margin-top: -4px;font-size:12px;"
+				value="6º Período/Estágio Supervisionado" />
+			<br />
+			<h:outputText style="font-size:14px;margin-right: 16px;"
+				value="Sistemas de Informação" />
+		</div>
+	</h:form>
+</h:body>
+</html>

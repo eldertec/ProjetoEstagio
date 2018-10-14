@@ -5,9 +5,12 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.annotation.SessionScope;
 
 import br.edu.faculdadedelta.projetoestagio.domain.Aluno;
@@ -31,7 +34,9 @@ public class AlunoController {
 	
 	private Role role = new Role("ROLE_ALUNO");
 	
-
+	
+	Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+	
 	public Aluno getAluno() {
 		return aluno;
 	}
@@ -54,6 +59,7 @@ public class AlunoController {
 		return "cadastroAluno.xhtml";
 	}
 
+	@RequestMapping(value = "/", method = RequestMethod.POST)
 	public String salvar() {
 		if(aluno.getId() == null) {
 			usuario.setSenha(new BCryptPasswordEncoder().encode(usuario.getSenha()));
@@ -64,17 +70,24 @@ public class AlunoController {
 			alunoRepository.save(aluno);
 			limpar();
 			FacesUtil.exibirMsg("Cadastro realizado com sucesso!");
-		}else {
-			alunoRepository.save(aluno);
-			FacesUtil.exibirMsg("Cadastro atualizado com sucesso!");
-			limpar();
 		}
-		return "index.xhtml";
+		return "/";
 	}
 	
 	public String atualizar() {
+		Aluno temp = new Aluno();
+		if(principal instanceof UserDetails) {
+			String login = ((UserDetails)principal).getUsername();
+			temp = alunoRepository.findByEmail(login);
+		}
+		if(temp.getId() != null) {
+		alunoRepository.save(temp);
+		FacesUtil.exibirMsg("Cadastro atualizado com sucesso!");
+		limpar();
+		}
 		return "cadastroAluno.xhtml";
 	}
+	
 	
 	public String remover() {
 		alunoRepository.delete(aluno);

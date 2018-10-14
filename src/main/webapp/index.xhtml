@@ -5,7 +5,11 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core">
 <h:head>
 	<meta charset="UTF-8" />
-	<link rel="stylesheet" type="text/css" href="resources/css/estilo.css" />
+	<link rel="stylesheet" type="text/css"
+		href="resources/css/primeflex.css" />
+	<link rel="stylesheet" type="text/css"
+		href="resources/css/primeflex.scss" />
+		<link rel="stylesheet" type="text/css" href="resources/css/estilo.css" />
 	<title>Faculdade Delta</title>
 </h:head>
 <h:body>
@@ -29,16 +33,14 @@
 							<f:facet name="header">
 								<h:outputText value="Login" />
 							</f:facet>
-							<p:outputLabel value="Email:" for="email" />
-							<p:inputText id="email" required="true" />
-							<p:outputLabel value="Senha:" for="senha" />
-							<p:password id="senha" required="true" />
+							
 							<f:facet name="footer">
 								<div style="text-align: right; padding: 5px;">
 									<p:commandButton value="Cadastrar" type="button"
 										onclick="PF('login').show();" icon="ui-icon-plus"
 										style="background: #0000CD;color:#ffffff;" />
 									<p:commandButton value="Entrar" ajax="false"
+										action="#{mainController.logar}"
 										icon="ui-icon-play" style="background: #339933;color:#ffffff;" />
 								</div>
 							</f:facet>
