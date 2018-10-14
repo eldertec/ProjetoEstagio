@@ -2,6 +2,8 @@ package br.edu.faculdadedelta.projetoestagio.domain;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -22,8 +25,8 @@ public class Curso implements Serializable {
 	private String nome;
 	private String descricao;
 	private String local;
-	
-	@DateTimeFormat(pattern="dd/MM/yyyy")
+
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date data;
 	private String hora;
 	private String duracao;
@@ -33,6 +36,9 @@ public class Curso implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "instrutor_id")
 	private Instrutor instrutor;
+
+	@OneToMany(mappedBy = "id.curso")
+	private Set<Matricula> matriculas = new HashSet<>();
 
 	public Curso() {
 		super();
@@ -131,6 +137,14 @@ public class Curso implements Serializable {
 
 	public void setQtdVaga(Integer qtdVaga) {
 		this.qtdVaga = qtdVaga;
+	}
+
+	public Set<Matricula> getMatriculas() {
+		return matriculas;
+	}
+
+	public void setMatriculas(Set<Matricula> matriculas) {
+		this.matriculas = matriculas;
 	}
 
 	@Override

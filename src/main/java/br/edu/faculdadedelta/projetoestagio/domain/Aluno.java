@@ -2,12 +2,15 @@ package br.edu.faculdadedelta.projetoestagio.domain;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -26,6 +29,9 @@ public class Aluno implements Serializable {
 	@OneToOne
 	@JoinColumn(name = "fk_user")
 	private Usuario usuario;
+
+	@OneToMany(mappedBy = "id.aluno")
+	private Set<Matricula> matriculas = new HashSet<>();
 
 	public Aluno() {
 		super();
@@ -97,6 +103,14 @@ public class Aluno implements Serializable {
 
 	public void setDataNascimento(Date dataNascimento) {
 		this.dataNascimento = dataNascimento;
+	}
+
+	public Set<Matricula> getMatriculas() {
+		return matriculas;
+	}
+
+	public void setMatriculas(Set<Matricula> matriculas) {
+		this.matriculas = matriculas;
 	}
 
 	@Override

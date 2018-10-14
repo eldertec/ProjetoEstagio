@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<h:head>
+	<meta charset="UTF-8" />
+	<link rel="stylesheet" type="text/css" href="resources/css/estilo.css" />
+	<link rel="stylesheet" type="text/css"
+		href="resources/css/primeflex.css" />
+	<link rel="stylesheet" type="text/css"
+		href="resources/css/primeflex.scss" />
+	<title>Faculdade Delta</title>
+
+</h:head>
+<h:body>
+
+	<div class="p-grid">
+		<div class="p-col-12 p-col-nogutter">
+			<p:menubar>
+				<p:menuitem value="Home" url="homeCoordenador.xhtml"
+					icon="ui-icon-home" />
+				<p:menuitem value="Meus Dados" url="cadastroUsuarioLogado.xhtml"
+					icon="ui-icon-note" />
+			</p:menubar>
+		</div>
+		<div class="p-col-12 p-md-3 p-col-nogutter">
+			<div class="p-grid">
+				<div class="p-col-10">
+					<h:form>
+						<p:growl />
+						<p:dataList value="#{matriculaController.listar}" var="mat"
+							type="unordered" itemType="none"
+							emptyMessage="Nenhum curso adicionado">
+							<f:facet name="header">
+            Meus Cursos
+        </f:facet>
+							<p:commandButton title="Remover" 
+								action="#{matriculaController.remover}"
+								onclick="return confirm('Confirma a exclusão do Curso?')"
+								ajax="false" immediate="true" styleClass="ui-icon ui-icon-closethick"
+								style="float:left;margin-right:10px;">
+								<f:setPropertyActionListener value="#{mat}"
+									target="#{matriculaController.matricula}" />
+							</p:commandButton>
+							<h:outputText value="#{mat.id.curso.nome}"
+								style="display:inline-block" />
+
+						</p:dataList>
+					</h:form>
+				</div>
+			</div>
+		</div>
+
+		<div class="p-col-12 p-md-9 p-col-nogutter">
+			<div class="p-grid">
+				<div class="p-col-11">
+					<h:form id="matricula">
+						<p:growl />
+
+
+
+						<p:dataGrid value="#{matriculaController.listarCurso}" var="c"
+							columns="3" layout="grid" rows="12" paginator="true" id="cars"
+							paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+							rowsPerPageTemplate="6,12,16">
+
+							<f:facet name="header">
+            					Cursos
+        					</f:facet>
+
+							<p:panel header="#{c.nome}" style="text-align:center">
+								<h:panelGrid columns="1" style="width:100%">
+
+									<h:outputText value="#{c.instrutor.nome}" />
+									<h:outputText value="#{c.data}">
+										<f:convertDateTime pattern="dd/MM/yyyy"
+											timeZone="America/Sao_Paulo" />
+									</h:outputText>
+
+									<p:commandButton update=":matricula:detalheCurso"
+										oncomplete="PF('modalDetalhe').show()"
+										icon="ui ui-icon-search" title="Detalhes do Curso">
+										<f:setPropertyActionListener value="#{c}"
+											target="#{matriculaController.curso}" immediate="true" />
+									</p:commandButton>
+									<p:commandButton title="Matricular" value="matricular"
+										action="#{matriculaController.salvar}"
+										icon="ui ui-icon-plus" ajax="false" immediate="true"
+										style="background: #000099;color:#ffffff;">
+										<f:setPropertyActionListener value="#{c}"
+											target="#{matriculaController.curso}" />
+									</p:commandButton>
+
+								</h:panelGrid>
+							</p:panel>
+
+						</p:dataGrid>
+
+						<p:dialog header="Detalhes do Curso" widgetVar="modalDetalhe"
+							modal="true" showEffect="fade" hideEffect="fade"
+							resizable="false">
+							<p:outputPanel id="detalheCurso" style="text-align:center;">
+								<p:panelGrid columns="2"
+									rendered="#{not empty matriculaController.listarDetalheCurso}"
+									columnClasses="label,value">
+									<f:facet name="header">
+										<h:outputText value="#{matriculaController.curso.nome}" />
+									</f:facet>
+
+									<h:outputText value="Instrutor:" />
+									<h:outputText
+										value="#{matriculaController.curso.instrutor.nome}" />
+									<h:outputText value="Local do Curso:" />
+									<h:outputText value="#{matriculaController.curso.local}" />
+									<h:outputText value="Data do Curso:" />
+									<h:outputText value="#{matriculaController.curso.data}">
+										<f:convertDateTime pattern="dd/MM/yyyy"
+											timeZone="America/Sao_Paulo" />
+									</h:outputText>
+									<h:outputText value="Horário do Curso:" />
+									<h:outputText value="#{matriculaController.curso.hora}" />
+									<h:outputText value="Duração do Curso:" />
+									<h:outputText value="#{matriculaController.curso.duracao}" />
+									<h:outputText value="Quantidade de Vagas:" />
+									<h:outputText value="#{matriculaController.curso.qtdVaga}" />
+									<h:outputText value="Valor do Curso:" />
+									<h:outputText value="#{matriculaController.curso.valor}" />
+									<h:outputText value="Descrição:" />
+									<h:outputText value="#{matriculaController.curso.descricao}" />
+								</p:panelGrid>
+							</p:outputPanel>
+						</p:dialog>
+
+						
+					</h:form>
+				</div>
+			</div>
+		</div>
+
+		<div class="p-col-12">
+			<div class="rodape">
+				<h:outputText style="margin-top: -4px;font-size:12px;"
+					value="6º Período/Estágio Supervisionado" />
+				<br />
+				<h:outputText style="font-size:14px;margin-right: 16px;"
+					value="Sistemas de Informação" />
+			</div>
+		</div>
+	</div>
+</h:body>
+</html>
