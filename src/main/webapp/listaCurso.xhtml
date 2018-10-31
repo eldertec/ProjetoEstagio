@@ -57,9 +57,14 @@
 										timeZone="America/Sao_Paulo" />
 								</h:outputText>
 							</p:column>
-							<p:column headerText="CheckIn" style="text-align:center;">
+							<p:column headerText="Opções" style="text-align:center;">
 								<p:commandButton action="#{matriculaController.abrirCheckin}" icon="ui ui-icon-calendar"
 									title="CheckIn do Curso" ajax="false">
+									<f:setPropertyActionListener value="#{c}"
+										target="#{matriculaController.curso}" immediate="true" />
+								</p:commandButton>
+								<p:commandButton action="#{matriculaController.abrirMatriculados}" icon="ui ui-icon-search"
+									title="Alunos matriculados" ajax="false">
 									<f:setPropertyActionListener value="#{c}"
 										target="#{matriculaController.curso}" immediate="true" />
 								</p:commandButton>

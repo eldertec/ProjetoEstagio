@@ -141,6 +141,10 @@ public class MatriculaController {
 		return "checkin.xhtml";
 	}
 	
+	public String abrirMatriculados() {
+		return "listaCursoAluno.xhtml";
+	}
+	
 	public void limpar() {
 		matriculaAluno = "";
 	}
