@@ -1,12 +1,9 @@
 package br.edu.faculdadedelta.projetoestagio.controller;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,10 +11,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.annotation.SessionScope;
 
 import br.edu.faculdadedelta.projetoestagio.domain.Aluno;
-import br.edu.faculdadedelta.projetoestagio.domain.Role;
 import br.edu.faculdadedelta.projetoestagio.domain.Usuario;
+import br.edu.faculdadedelta.projetoestagio.domain.enums.Perfil;
 import br.edu.faculdadedelta.projetoestagio.repositories.AlunoRepository;
 import br.edu.faculdadedelta.projetoestagio.repositories.UsuarioRepository;
+import br.edu.faculdadedelta.projetoestagio.security.UserSS;
+import br.edu.faculdadedelta.projetoestagio.service.UsuarioService;
 import br.edu.faculdadedelta.projetoestagio.util.FacesUtil;
 
 @Controller
@@ -32,10 +31,6 @@ public class AlunoController {
 	@Autowired
 	private UsuarioRepository usuarioRepository;
 	
-	private Role role = new Role("ROLE_ALUNO");
-	
-	
-	Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 	
 	public Aluno getAluno() {
 		return aluno;
@@ -64,27 +59,23 @@ public class AlunoController {
 		if(aluno.getId() == null) {
 			usuario.setSenha(new BCryptPasswordEncoder().encode(usuario.getSenha()));
 			usuario.setLogin(aluno.getEmail());
-			usuario.getRoles().addAll(Arrays.asList(role));
+			usuario.addPerfil(Perfil.ALUNO);
 			usuarioRepository.save(usuario);
 			aluno.setUsuario(usuario);
 			alunoRepository.save(aluno);
 			limpar();
 			FacesUtil.exibirMsg("Cadastro realizado com sucesso!");
+			return "/";
+		}else {
+			alunoRepository.save(aluno);
+			FacesUtil.exibirMsg("Cadastro atualizado com sucesso!");
+			limpar();
+			return "cadastroAluno.xhtml";
 		}
-		return "/";
+		
 	}
 	
 	public String atualizar() {
-		Aluno temp = new Aluno();
-		if(principal instanceof UserDetails) {
-			String login = ((UserDetails)principal).getUsername();
-			temp = alunoRepository.findByEmail(login);
-		}
-		if(temp.getId() != null) {
-		alunoRepository.save(temp);
-		FacesUtil.exibirMsg("Cadastro atualizado com sucesso!");
-		limpar();
-		}
 		return "cadastroAluno.xhtml";
 	}
 	
@@ -95,12 +86,23 @@ public class AlunoController {
 		return "listaAluno.xhtml";
 	}
 	
-	public List<Aluno> getlistar(){
+	public List<Aluno> getListar(){
 		List<Aluno> alunos = new ArrayList<>();
 		
 		alunos = alunoRepository.findAll();
 		
 		return alunos;
 	}
+	
+	public List<Aluno> getListarLogado(){
+		List<Aluno> alunoLogado = new ArrayList<>();
+		UserSS logado = UsuarioService.logado();
+		if(logado != null) {
+			aluno = alunoRepository.findByEmail(logado.getUsername());
+			alunoLogado.add(aluno);
+		}
+		return alunoLogado;
+	}
+	
 
 }

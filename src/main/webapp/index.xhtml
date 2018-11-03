@@ -7,49 +7,43 @@
 	<meta charset="UTF-8" />
 	<link rel="stylesheet" type="text/css"
 		href="resources/css/primeflex.css" />
-	<link rel="stylesheet" type="text/css"
-		href="resources/css/primeflex.scss" />
-		<link rel="stylesheet" type="text/css" href="resources/css/estilo.css" />
+	<link rel="stylesheet" type="text/css" href="resources/css/estilo.css" />
 	<title>Faculdade Delta</title>
 </h:head>
 <h:body>
-
-	<div class="p-grid sample-layout">
-		<div class="p-col-12 p-col-nogutter">
-			<p:menubar>
-
-			</p:menubar>
-		</div>
-		<div class="p-col-12 p-md-3">
-			<div class="p-grid">
-				<div class="p-col-12"></div>
+	<h:form>
+		<div class="p-grid">
+			<div class="p-col-12 p-col-nogutter">
+				<p:menubar>
+					<f:facet name="options">
+						<p:button href="login" value="Entrar"></p:button>
+					</f:facet>
+				</p:menubar>
 			</div>
-		</div>
-		<div class="p-col-12 p-md-6">
-			<div class="p-grid">
-				<div class="p-col-12">
-					<h:form>
+			<div class="p-col-12 p-md-3">
+				<div class="p-grid">
+					<div class="p-col-12"></div>
+				</div>
+			</div>
+			<div class="p-col-12 p-md-6">
+				<div class="p-grid">
+					<div class="p-col-12">
 						<p:panelGrid columns="2" style="margin:auto;">
 							<f:facet name="header">
 								<h:outputText value="Login" />
 							</f:facet>
-							
+
 							<f:facet name="footer">
 								<div style="text-align: right; padding: 5px;">
 									<p:commandButton value="Cadastrar" type="button"
 										onclick="PF('login').show();" icon="ui-icon-plus"
 										style="background: #0000CD;color:#ffffff;" />
-									<p:commandButton value="Entrar" ajax="false"
-										action="#{mainController.logar}"
-										icon="ui-icon-play" style="background: #339933;color:#ffffff;" />
 								</div>
 							</f:facet>
 
 						</p:panelGrid>
-					</h:form>
 
-					<h:form>
-					<p:growl />
+						<p:growl />
 						<p:dialog header="Cadastro" widgetVar="login" modal="true">
 							<p:panelGrid columns="2">
 								<f:facet name="header">
@@ -73,7 +67,7 @@
 								</p:inputText>
 								<p:outputLabel for="cpf" value="CPF: " />
 								<p:inputMask id="cpf" value="#{alunoController.aluno.cpf}"
-									label="CPF: " mask="999.999.999-99"/>
+									label="CPF: " mask="999.999.999-99" />
 								<p:outputLabel for="email" value="Email: " />
 								<p:inputText id="email" value="#{alunoController.aluno.email}"
 									label="Email: " required="true"
@@ -102,26 +96,25 @@
 								</f:facet>
 							</p:panelGrid>
 						</p:dialog>
-					</h:form>
+					</div>
+				</div>
+			</div>
+			<div class="p-col-12 p-md-3">
+				<div class="p-grid">
+					<div class="p-col-12"></div>
+				</div>
+			</div>
+
+			<div class="p-col-12">
+				<div class="rodape">
+					<h:outputText style="margin-top: -4px;font-size:12px;"
+						value="6º Período/Estágio Supervisionado" />
+					<br />
+					<h:outputText style="font-size:14px;margin-right: 16px;"
+						value="Sistemas de Informação" />
 				</div>
 			</div>
 		</div>
-		<div class="p-col-12 p-md-3">
-			<div class="p-grid">
-				<div class="p-col-12"></div>
-			</div>
-		</div>
-
-		<div class="p-col-12">
-			<div class="rodape">
-				<h:outputText style="margin-top: -4px;font-size:12px;"
-					value="6º Período/Estágio Supervisionado" />
-				<br />
-				<h:outputText style="font-size:14px;margin-right: 16px;"
-					value="Sistemas de Informação" />
-			</div>
-		</div>
-	</div>
-
+	</h:form>
 </h:body>
 </html>

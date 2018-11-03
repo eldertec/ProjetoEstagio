@@ -11,8 +11,8 @@
 		href="resources/css/primeflex.css" />
 	<link rel="stylesheet" type="text/css"
 		href="resources/css/primeflex.scss" />
-		<link rel="stylesheet" type="text/css" href="resources/css/estilo.css" />
-	<title>CheckIn</title>
+	<link rel="stylesheet" type="text/css" href="resources/css/estilo.css" />
+	<title>Matriculados</title>
 </h:head>
 <h:body>
 	<h:form>
@@ -20,24 +20,39 @@
 		<div class="p-grid">
 			<div class="p-col-12 p-col-nogutter">
 				<p:menubar>
-					<p:menuitem value="Home" url="homeAluno.xhtml" icon="ui-icon-home" />
-					<p:menuitem value="Certificados" url="#"
+					<p:menuitem value="Home" url="homeCoordenador.xhtml"
+						icon="ui-icon-home" />
+					<p:menuitem value="Meus Dados" url="cadastroUsuarioLogado.xhtml"
+						icon="ui-icon-pencil" />
+					<p:menuitem value="Cursos" url="cadastroCurso.xhtml"
 						icon="ui-icon-note" />
+					<p:submenu label="Listar" icon="ui-icon-document">
+						<p:menuitem value="Alunos" url="listaAlunoCurso.xhtml"
+							icon="ui-icon-person" />
+						<p:menuitem value="Cursos" url="listaCurso.xhtml"
+							icon="ui-icon-folder-open" />
+					</p:submenu>
+					<p:menuitem value="Voltar" url="listaCurso.xhtml"
+					icon="ui-icon-arrowreturnthick-1-w" />
+					<f:facet name="options">
+						<p:button href="logout" icon="ui-icon-extlink"></p:button>
+					</f:facet>
 				</p:menubar>
 			</div>
 			<div class="p-col-12 p-md-1 p-col-nogutter">
 				<div class="p-grid">
-					<div class="p-col-12">
-					</div>
+					<div class="p-col-12"></div>
 				</div>
 			</div>
 			<div class="p-col-12 p-md-10 p-col-nogutter">
 				<div class="p-grid">
 					<div class="p-col-12">
 						<p:dataTable value="#{matriculaController.listarAluno}" var="m"
-							resizableColumns="true" emptyMessage="Nenhum Aluno Cadastrado" style="width:98.5%;">
+							resizableColumns="true" emptyMessage="Nenhum Aluno Cadastrado"
+							style="width:98.5%;">
 							<f:facet name="header">
-								<h:outputText value="Matriculados no curso: #{matriculaController.curso.nome}" />
+								<h:outputText
+									value="Matriculados no curso: #{matriculaController.curso.nome}" />
 							</f:facet>
 							<p:column headerText="Aluno" style="text-align:center;">
 								<h:outputText value="#{m.id.aluno.nome}" />
@@ -52,11 +67,10 @@
 					</div>
 				</div>
 			</div>
-			
+
 			<div class="p-col-12 p-md-1 p-col-nogutter">
 				<div class="p-grid">
-					<div class="p-col-12">
-					</div>
+					<div class="p-col-12"></div>
 				</div>
 			</div>
 

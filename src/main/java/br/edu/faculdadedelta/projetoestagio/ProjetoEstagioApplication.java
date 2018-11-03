@@ -12,8 +12,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import br.edu.faculdadedelta.projetoestagio.domain.Aluno;
 import br.edu.faculdadedelta.projetoestagio.domain.Curso;
 import br.edu.faculdadedelta.projetoestagio.domain.Instrutor;
-import br.edu.faculdadedelta.projetoestagio.domain.Role;
 import br.edu.faculdadedelta.projetoestagio.domain.Usuario;
+import br.edu.faculdadedelta.projetoestagio.domain.enums.Perfil;
 import br.edu.faculdadedelta.projetoestagio.repositories.AlunoRepository;
 import br.edu.faculdadedelta.projetoestagio.repositories.CursoRepository;
 import br.edu.faculdadedelta.projetoestagio.repositories.InstrutorRepository;
@@ -31,6 +31,7 @@ public class ProjetoEstagioApplication implements CommandLineRunner {
 	
 	@Autowired
 	private CursoRepository cursoRepository;
+	
 
 	public static void main(String[] args) {
 		SpringApplication.run(ProjetoEstagioApplication.class, args);
@@ -48,16 +49,14 @@ public class ProjetoEstagioApplication implements CommandLineRunner {
 		Usuario userAluno5 = new Usuario(null, "walter@gmail.com", new BCryptPasswordEncoder().encode("12345"));
 		Usuario userAluno6 = new Usuario(null, "jonas@gmail.com", new BCryptPasswordEncoder().encode("12345"));
 
-		Role role = new Role("ROLE_ADMIN");
-		usuario.getRoles().addAll(Arrays.asList(role));
+		usuario.addPerfil(Perfil.ADMIN);
 		
-		Role roleAluno = new Role("ROLE_ALUNO");
-		userAluno.getRoles().addAll(Arrays.asList(roleAluno));
-		userAluno2.getRoles().addAll(Arrays.asList(roleAluno));
-		userAluno3.getRoles().addAll(Arrays.asList(roleAluno));
-		userAluno4.getRoles().addAll(Arrays.asList(roleAluno));
-		userAluno5.getRoles().addAll(Arrays.asList(roleAluno));
-		userAluno6.getRoles().addAll(Arrays.asList(roleAluno));
+		userAluno.addPerfil(Perfil.ALUNO);
+		userAluno2.addPerfil(Perfil.ALUNO);
+		userAluno3.addPerfil(Perfil.ALUNO);
+		userAluno4.addPerfil(Perfil.ALUNO);
+		userAluno5.addPerfil(Perfil.ALUNO);
+		userAluno6.addPerfil(Perfil.ALUNO);
 
 		usuarioRepository.saveAll(Arrays.asList(usuario,userAluno,userAluno2,userAluno3,userAluno4,userAluno5,userAluno6));
 
@@ -91,6 +90,8 @@ public class ProjetoEstagioApplication implements CommandLineRunner {
 		i3.getCursos().addAll(Arrays.asList(c3,c6,c9));
 		
 		cursoRepository.saveAll(Arrays.asList(c1, c2, c3,c4,c5,c6,c7,c8,c9));
+		
+		
 
 	}
 }

@@ -3,7 +3,6 @@ package br.edu.faculdadedelta.projetoestagio.security;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -17,7 +16,7 @@ import br.edu.faculdadedelta.projetoestagio.repositories.UsuarioRepository;
 public class ImplementsUserDetailsService implements UserDetailsService {
 
 	@Autowired
-	UsuarioRepository repo;
+	private UsuarioRepository repo;
 
 	@Override
 	public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
@@ -26,7 +25,7 @@ public class ImplementsUserDetailsService implements UserDetailsService {
 		if (usuario == null) {
 			throw new UsernameNotFoundException("Usuario não encontrado!");
 		}
-		return new User(usuario.getUsername(), usuario.getPassword(), true, true, true, true, usuario.getAuthorities());
+		return new UserSS(usuario.getId(), usuario.getLogin(), usuario.getSenha(), usuario.getPerfis());
 	}
 
 }

@@ -4,11 +4,14 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import br.edu.faculdadedelta.projetoestagio.domain.Aluno;
+import br.edu.faculdadedelta.projetoestagio.domain.Usuario;
 
 @Repository
 public interface AlunoRepository extends JpaRepository<Aluno, Long>{
 
-	public Aluno findByMatricula(String matricula);
+	Aluno findByMatricula(String matricula);
 	
-	public Aluno findByEmail(String email);
+	Aluno findByEmail(String email);
+	
+	Aluno findByUsuario(Usuario usuario);
 }

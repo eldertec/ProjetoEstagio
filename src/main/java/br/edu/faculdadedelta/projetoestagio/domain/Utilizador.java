@@ -26,7 +26,6 @@ public class Utilizador implements Serializable {
 	private Usuario usuario;
 
 	public Utilizador() {
-		super();
 	}
 
 	public Utilizador(Long id, String nome, TipoUtilizador tipo, Usuario usuario) {

@@ -14,7 +14,7 @@
 		href="resources/css/primeflex.scss" />
 	<link rel="stylesheet" type="text/css" href="resources/css/estilo.css" />
 
-	<title>Faculdade Delta</title>
+	<title>Usuários</title>
 </h:head>
 <h:body>
 	<div class="p-grid">
@@ -23,6 +23,9 @@
 				<p:menuitem value="Home" url="home.xhtml" icon="ui-icon-home" />
 				<p:menuitem value="Alunos" url="listaAluno.xhtml"
 					icon="ui-icon-note" />
+				<f:facet name="options">
+					<p:button href="logout" icon="ui-icon-extlink"></p:button>
+				</f:facet>
 			</p:menubar>
 		</div>
 		<div class="p-col-12 p-md-3 p-col-nogutter">
@@ -87,7 +90,8 @@
 				<div class="p-col-12">
 					<h:form data-js="tabela">
 						<p:dataTable value="#{utilizadorController.listar}" var="u"
-							resizableColumns="true" emptyMessage="Nenhum Usuário Cadastrado" style="width:98.5%;">
+							resizableColumns="true" emptyMessage="Nenhum Usuário Cadastrado"
+							style="width:98.5%;">
 							<f:facet name="header">
 								<h:outputText value="Usuários" />
 							</f:facet>

@@ -12,7 +12,7 @@
 		href="resources/css/primeflex.css" />
 	<link rel="stylesheet" type="text/css"
 		href="resources/css/primeflex.scss" />
-	<title>Faculdade Delta</title>
+	<title>Cursos</title>
 
 </h:head>
 <h:body>
@@ -20,15 +20,24 @@
 	<div class="p-grid">
 		<div class="p-col-12 p-col-nogutter">
 			<p:menubar>
-				<p:menuitem value="Home" url="homeCoordenador.xhtml" icon="ui-icon-home" />
+				<p:menuitem value="Home" url="homeCoordenador.xhtml"
+					icon="ui-icon-home" />
 				<p:menuitem value="Meus Dados" url="cadastroUsuarioLogado.xhtml"
+					icon="ui-icon-pencil" />
+				<p:menuitem value="Cursos" url="cadastroCurso.xhtml"
 					icon="ui-icon-note" />
+				<p:submenu label="Listar" icon="ui-icon-document">
+					<p:menuitem value="Alunos" url="listaAlunoCurso.xhtml"
+						icon="ui-icon-person" />
+				</p:submenu>
+				<f:facet name="options">
+					<p:button href="logout" icon="ui-icon-extlink"></p:button>
+				</f:facet>
 			</p:menubar>
 		</div>
 		<div class="p-col-12 p-md-1 p-col-nogutter">
 			<div class="p-grid">
-				<div class="p-col-12">
-				</div>
+				<div class="p-col-12"></div>
 			</div>
 		</div>
 
@@ -38,7 +47,8 @@
 					<h:form id="form">
 						<p:growl />
 						<p:dataTable value="#{cursoController.listar}" var="c"
-							resizableColumns="true" emptyMessage="Nenhum Curso Cadastrado" style="width:98.5%;">
+							resizableColumns="true" emptyMessage="Nenhum Curso Cadastrado"
+							style="width:98.5%;">
 							<f:facet name="header">
 								<h:outputText value="Cursos Cadastrados" />
 							</f:facet>
@@ -58,13 +68,16 @@
 								</h:outputText>
 							</p:column>
 							<p:column headerText="Opções" style="text-align:center;">
-								<p:commandButton action="#{matriculaController.abrirCheckin}" icon="ui ui-icon-calendar"
-									title="CheckIn do Curso" ajax="false">
+								<p:commandButton action="#{matriculaController.abrirCheckin}"
+									icon="ui ui-icon-calendar" title="CheckIn do Curso"
+									ajax="false">
 									<f:setPropertyActionListener value="#{c}"
 										target="#{matriculaController.curso}" immediate="true" />
 								</p:commandButton>
-								<p:commandButton action="#{matriculaController.abrirMatriculados}" icon="ui ui-icon-search"
-									title="Alunos matriculados" ajax="false">
+								<p:commandButton
+									action="#{matriculaController.abrirMatriculados}"
+									icon="ui ui-icon-search" title="Alunos matriculados"
+									ajax="false">
 									<f:setPropertyActionListener value="#{c}"
 										target="#{matriculaController.curso}" immediate="true" />
 								</p:commandButton>
@@ -74,11 +87,10 @@
 				</div>
 			</div>
 		</div>
-		
+
 		<div class="p-col-12 p-md-1 p-col-nogutter">
 			<div class="p-grid">
-				<div class="p-col-12">
-				</div>
+				<div class="p-col-12"></div>
 			</div>
 		</div>
 

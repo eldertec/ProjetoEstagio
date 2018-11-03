@@ -1,7 +1,6 @@
 package br.edu.faculdadedelta.projetoestagio.controller;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.annotation.SessionScope;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import br.edu.faculdadedelta.projetoestagio.domain.Role;
 import br.edu.faculdadedelta.projetoestagio.domain.Usuario;
 import br.edu.faculdadedelta.projetoestagio.domain.Utilizador;
+import br.edu.faculdadedelta.projetoestagio.domain.enums.Perfil;
 import br.edu.faculdadedelta.projetoestagio.domain.enums.TipoUtilizador;
 import br.edu.faculdadedelta.projetoestagio.repositories.UsuarioRepository;
 import br.edu.faculdadedelta.projetoestagio.repositories.UtilizadorRepository;
@@ -30,7 +29,6 @@ public class UtilizadorController {
 	@Autowired
 	private UsuarioRepository usuarioRepository;
 
-	private Role role = new Role();
 
 	private Utilizador utilizador = new Utilizador();
 	private Usuario usuario = new Usuario();
@@ -43,13 +41,6 @@ public class UtilizadorController {
 		this.utilizador = utilizador;
 	}
 
-	public Role getRole() {
-		return role;
-	}
-
-	public void setRole(Role role) {
-		this.role = role;
-	}
 
 	public Usuario getUsuario() {
 		return usuario;
@@ -68,16 +59,15 @@ public class UtilizadorController {
 	public String salvar() {
 		if (utilizador.getId() == null) {
 			if (utilizador.getTipo().getCod() == 1) {
-				role.setRole("ROLE_COORDENADOR");
-			}
+				usuario.addPerfil(Perfil.COORDENADOR);
+			}else 
 			if (utilizador.getTipo().getCod() == 2) {
-				role.setRole("ROLE_REPRESENTANTE");
-			}
+				usuario.addPerfil(Perfil.REPRESENTANTE);
+			}else 
 			if (utilizador.getTipo().getCod() == 3) {
-				role.setRole("ROLE_FUNCIONARIO");
+				usuario.addPerfil(Perfil.FUNCIONARIO);
 			}
 			usuario.setSenha(new BCryptPasswordEncoder().encode(usuario.getSenha()));
-			usuario.getRoles().addAll(Arrays.asList(role));
 			usuarioRepository.save(usuario);
 			utilizador.setUsuario(usuario);
 			repo.save(utilizador);
