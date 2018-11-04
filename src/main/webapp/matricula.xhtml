@@ -34,7 +34,7 @@
 				<div class="p-col-10">
 					<h:form>
 						<p:growl />
-						<p:dataList value="#{matriculaController.listar}" var="mat"
+						<p:dataList value="#{matriculaController.listarMeusCursos}" var="mat"
 							type="unordered" itemType="none"
 							emptyMessage="Nenhum curso adicionado">
 							<f:facet name="header">
@@ -67,7 +67,7 @@
 
 
 						<p:dataGrid value="#{matriculaController.listarDetalheCurso}"
-							var="c" columns="3" layout="grid" rows="12" paginator="true"
+							var="c" columns="3" layout="grid" rows="9" paginator="true"
 							id="cars"
 							paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 							rowsPerPageTemplate="6,12,16">

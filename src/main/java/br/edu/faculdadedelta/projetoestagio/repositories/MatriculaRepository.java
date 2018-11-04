@@ -12,7 +12,9 @@ import br.edu.faculdadedelta.projetoestagio.domain.Matricula;
 @Repository
 public interface MatriculaRepository extends JpaRepository<Matricula, Long> {
 
-	Matricula findByIdAluno(Aluno aluno);
+	Matricula findByIdAlunoMatricula(String matricula);
+	
+	List<Matricula> findByIdAluno(Aluno aluno);
 	
 	List<Matricula> findByIdCurso(Curso curso);
 }

@@ -123,18 +123,33 @@ public class MatriculaController {
 		return cursos;
 	}
 	
+	public List<Matricula> getListarMeusCursos() {
+		List<Matricula> matriculas = new ArrayList<>();
+		logado = logado();
+		matriculas = repo.findByIdAluno(logado);
+		return matriculas;
+	}
+	
 	public String checkin() {
-		logado = alunoRepository.findByMatricula(matriculaAluno);
-		matricula = repo.findByIdAluno(logado);
-		if(matricula != null) {
-			matricula.setStatusPresenca(StatusPresenca.PRESENTE);
-			repo.save(matricula);
-			limpar();
-			FacesUtil.exibirMsg("Checkin realizado com sucesso!");
+		List<Matricula> cursos = new ArrayList<>();
+		Aluno presente = alunoRepository.findByMatricula(matriculaAluno);
+		cursos = repo.findByIdAluno(presente);
+		for(Matricula m : cursos) {
+			if(m != null && m.getCurso().getId().equals(curso.getId())) {
+				m.setStatusPresenca(StatusPresenca.PRESENTE);
+				repo.save(m);
+				limpar();
+				FacesUtil.exibirMsg("Checkin realizado com sucesso!");
+				return "checkin.xhtml";
+			}
+		}
+		if(cursos.isEmpty()) {
+			FacesUtil.exibirMsg("Aluno não encontrado");
 			return "checkin.xhtml";
 		}
 		FacesUtil.exibirMsg("Aluno não encontrado");
 		return "checkin.xhtml";
+		
 	}
 	
 	public String abrirCheckin() {
