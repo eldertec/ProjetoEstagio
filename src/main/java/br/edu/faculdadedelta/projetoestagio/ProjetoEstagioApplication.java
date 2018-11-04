@@ -12,8 +12,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import br.edu.faculdadedelta.projetoestagio.domain.Aluno;
 import br.edu.faculdadedelta.projetoestagio.domain.Curso;
 import br.edu.faculdadedelta.projetoestagio.domain.Instrutor;
-import br.edu.faculdadedelta.projetoestagio.domain.Role;
 import br.edu.faculdadedelta.projetoestagio.domain.Usuario;
+import br.edu.faculdadedelta.projetoestagio.domain.enums.Perfil;
 import br.edu.faculdadedelta.projetoestagio.repositories.AlunoRepository;
 import br.edu.faculdadedelta.projetoestagio.repositories.CursoRepository;
 import br.edu.faculdadedelta.projetoestagio.repositories.InstrutorRepository;
@@ -31,6 +31,7 @@ public class ProjetoEstagioApplication implements CommandLineRunner {
 	
 	@Autowired
 	private CursoRepository cursoRepository;
+	
 
 	public static void main(String[] args) {
 		SpringApplication.run(ProjetoEstagioApplication.class, args);
@@ -41,15 +42,23 @@ public class ProjetoEstagioApplication implements CommandLineRunner {
 
 		Usuario usuario = new Usuario(null, "admin", new BCryptPasswordEncoder().encode("admin"));
 		
-		Usuario userAluno = new Usuario(null, "teste@gmail.com", new BCryptPasswordEncoder().encode("12345"));
+		Usuario userAluno = new Usuario(null, "bruno@gmail.com", new BCryptPasswordEncoder().encode("12345"));
+		Usuario userAluno2 = new Usuario(null, "iara@gmail.com", new BCryptPasswordEncoder().encode("12345"));
+		Usuario userAluno3 = new Usuario(null, "samuel@gmail.com", new BCryptPasswordEncoder().encode("12345"));
+		Usuario userAluno4 = new Usuario(null, "lucianna@gmail.com", new BCryptPasswordEncoder().encode("12345"));
+		Usuario userAluno5 = new Usuario(null, "walter@gmail.com", new BCryptPasswordEncoder().encode("12345"));
+		Usuario userAluno6 = new Usuario(null, "jonas@gmail.com", new BCryptPasswordEncoder().encode("12345"));
 
-		Role role = new Role("ROLE_ADMIN");
-		usuario.getRoles().addAll(Arrays.asList(role));
+		usuario.addPerfil(Perfil.ADMIN);
 		
-		Role roleAluno = new Role("ROLE_ALUNO");
-		userAluno.getRoles().addAll(Arrays.asList(roleAluno));
+		userAluno.addPerfil(Perfil.ALUNO);
+		userAluno2.addPerfil(Perfil.ALUNO);
+		userAluno3.addPerfil(Perfil.ALUNO);
+		userAluno4.addPerfil(Perfil.ALUNO);
+		userAluno5.addPerfil(Perfil.ALUNO);
+		userAluno6.addPerfil(Perfil.ALUNO);
 
-		usuarioRepository.saveAll(Arrays.asList(usuario,userAluno));
+		usuarioRepository.saveAll(Arrays.asList(usuario,userAluno,userAluno2,userAluno3,userAluno4,userAluno5,userAluno6));
 
 		Instrutor i1 = new Instrutor(null, "Paulo Roberto", "Spring MVC", "paulonill@gmail.com");
 		Instrutor i2 = new Instrutor(null, "Osmar", "HTML", "webmaster@gmail.com");
@@ -57,25 +66,32 @@ public class ProjetoEstagioApplication implements CommandLineRunner {
 
 		instrutorRepository.saveAll(Arrays.asList(i1, i2, i3));
 		
-		Aluno aluno = new Aluno(null, "Teste", "teste@gmail.com", "123456", "66633322211", new Date(), userAluno);
+		Aluno aluno = new Aluno(null, "Bruno", "bruno@gmail.com", "010101", "66633322211", new Date(), userAluno);
+		Aluno aluno2 = new Aluno(null, "Iara", "iara@gmail.com", "020202", "66633322210", new Date(), userAluno2);
+		Aluno aluno3 = new Aluno(null, "Samuel", "samuel@gmail.com", "030303", "66633322212", new Date(), userAluno3);
+		Aluno aluno4 = new Aluno(null, "Lucianna", "lucianna@gmail.com", "040404", "66633322213", new Date(), userAluno4);
+		Aluno aluno5 = new Aluno(null, "Walter", "walter@gmail.com", "050505", "66633322214", new Date(), userAluno5);
+		Aluno aluno6 = new Aluno(null, "Jonas", "jonas@gmail.com", "060606", "66633322215", new Date(), userAluno6);
 		
-		alunoRepository.saveAll(Arrays.asList(aluno));
+		alunoRepository.saveAll(Arrays.asList(aluno,aluno2,aluno3,aluno4,aluno5,aluno6));
 		
-		Curso c1 = new Curso(null, "Teste", "Qualquer coisa", "Delta", new Date(), "15:00", "3 horas", 50.0, 20, i1);
-		Curso c2 = new Curso(null, "Teste2", "Qualquer coisa", "Delta", new Date(), "15:00", "3 horas", 50.0, 20, i2);
-		Curso c3 = new Curso(null, "Teste3", "Qualquer coisa", "Delta", new Date(), "15:00", "3 horas", 50.0, 20, i3);
-		Curso c4 = new Curso(null, "Teste4", "Qualquer coisa", "Delta", new Date(), "15:00", "3 horas", 50.0, 20, i1);
-		Curso c5 = new Curso(null, "Teste5", "Qualquer coisa", "Delta", new Date(), "15:00", "3 horas", 50.0, 20, i2);
-		Curso c6 = new Curso(null, "Teste6", "Qualquer coisa", "Delta", new Date(), "15:00", "3 horas", 50.0, 20, i3);
-		Curso c7 = new Curso(null, "Teste7", "Qualquer coisa", "Delta", new Date(), "15:00", "3 horas", 50.0, 20, i1);
-		Curso c8 = new Curso(null, "Teste8", "Qualquer coisa", "Delta", new Date(), "15:00", "3 horas", 50.0, 20, i2);
-		Curso c9 = new Curso(null, "Teste9", "Qualquer coisa", "Delta", new Date(), "15:00", "3 horas", 50.0, 20, i3);
+		Curso c1 = new Curso(null, "Java Web", "Qualquer coisa", "Delta", new Date(), "15:00", "3 horas", 50.0, 20, i1);
+		Curso c2 = new Curso(null, "Data Science", "Qualquer coisa", "Delta", new Date(), "15:00", "3 horas", 50.0, 20, i2);
+		Curso c3 = new Curso(null, "Javascript", "Qualquer coisa", "Delta", new Date(), "15:00", "3 horas", 50.0, 20, i3);
+		Curso c4 = new Curso(null, "Python", "Qualquer coisa", "Delta", new Date(), "15:00", "3 horas", 50.0, 20, i1);
+		Curso c5 = new Curso(null, "Html e Css", "Qualquer coisa", "Delta", new Date(), "15:00", "3 horas", 50.0, 20, i2);
+		Curso c6 = new Curso(null, "Inteligência Artificial", "Qualquer coisa", "Delta", new Date(), "15:00", "3 horas", 50.0, 20, i3);
+		Curso c7 = new Curso(null, "Php", "Qualquer coisa", "Delta", new Date(), "15:00", "3 horas", 50.0, 20, i1);
+		Curso c8 = new Curso(null, "Scrum", "Qualquer coisa", "Delta", new Date(), "15:00", "3 horas", 50.0, 20, i2);
+		Curso c9 = new Curso(null, "Spring Boot", "Qualquer coisa", "Delta", new Date(), "15:00", "3 horas", 50.0, 20, i3);
 		
 		i1.getCursos().addAll(Arrays.asList(c1,c4,c7));
 		i2.getCursos().addAll(Arrays.asList(c2,c5,c8));
 		i3.getCursos().addAll(Arrays.asList(c3,c6,c9));
 		
 		cursoRepository.saveAll(Arrays.asList(c1, c2, c3,c4,c5,c6,c7,c8,c9));
+		
+		
 
 	}
 }

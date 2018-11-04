@@ -20,21 +20,24 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	private ImplementsUserDetailsService userDetailsService;
-	
+
+	private static final String[] PUBLIC_MATCHERS_GET = { "/index.xhtml" };
+
+	private static final String[] PUBLIC_MATCHERS_POST = { "/index.xhtml" };
 
 	public WebSecurityConfig() {
 		super();
 	}
-	
+
 	@Bean("authenticationManager")
-    @Override
-    public AuthenticationManager authenticationManagerBean() throws Exception {
-            return super.authenticationManagerBean();
-    }
+	@Override
+	public AuthenticationManager authenticationManagerBean() throws Exception {
+		return super.authenticationManagerBean();
+	}
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder());
+		auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
 	}
 
 	@Override
@@ -43,21 +46,26 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 
 	@Override
-	protected void configure(HttpSecurity http) throws Exception{
+	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable().authorizeRequests()
-		.antMatchers(HttpMethod.GET,"/").permitAll()
-		.antMatchers(HttpMethod.POST,"/").permitAll()
-		.antMatchers(HttpMethod.GET, "/home").hasRole("ADMIN")
-		.antMatchers(HttpMethod.GET, "/homeAluno").hasRole("ALUNO")
-		.antMatchers(HttpMethod.GET, "/homeCoordenador").hasRole("COORDENADOR")
-		.anyRequest().authenticated()
-		.and().formLogin().successHandler(myAuthenticationSuccessHandler()).permitAll()
-		.and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
+				.antMatchers(HttpMethod.GET, PUBLIC_MATCHERS_GET).permitAll()
+				.antMatchers(HttpMethod.POST, PUBLIC_MATCHERS_POST).permitAll()
+				.antMatchers(HttpMethod.GET, "/home").hasRole("ADMIN")
+				.antMatchers(HttpMethod.GET, "/homeAluno").hasRole("ALUNO")
+				.antMatchers(HttpMethod.GET, "/homeCoordenador").hasRole("COORDENADOR")
+				.anyRequest().authenticated()
+				.and().formLogin().successHandler(myAuthenticationSuccessHandler()).permitAll()
+				.and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
 	}
-	
+
 	@Bean
-    public AuthenticationSuccessHandler myAuthenticationSuccessHandler(){
-        return new MySimpleUrlAuthenticationSuccessHandler();
-    }
+	public AuthenticationSuccessHandler myAuthenticationSuccessHandler() {
+		return new MySimpleUrlAuthenticationSuccessHandler();
+	}
+
+	@Bean
+	BCryptPasswordEncoder bCryptPasswordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
 
 }

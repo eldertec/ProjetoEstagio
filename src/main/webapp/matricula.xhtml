@@ -12,7 +12,7 @@
 		href="resources/css/primeflex.css" />
 	<link rel="stylesheet" type="text/css"
 		href="resources/css/primeflex.scss" />
-	<title>Faculdade Delta</title>
+	<title>Matrículas</title>
 
 </h:head>
 <h:body>
@@ -20,10 +20,13 @@
 	<div class="p-grid">
 		<div class="p-col-12 p-col-nogutter">
 			<p:menubar>
-				<p:menuitem value="Home" url="homeCoordenador.xhtml"
-					icon="ui-icon-home" />
-				<p:menuitem value="Meus Dados" url="cadastroUsuarioLogado.xhtml"
-					icon="ui-icon-note" />
+				<p:menuitem value="Home" url="homeAluno.xhtml" icon="ui-icon-home" />
+				<p:menuitem value="Meus Dados" url="cadastroAluno.xhtml"
+					icon="ui-icon-pencil" />
+				<p:menuitem value="Certificados" url="#" icon="ui-icon-script" />
+				<f:facet name="options">
+					<p:button href="logout" icon="ui-icon-extlink"></p:button>
+				</f:facet>
 			</p:menubar>
 		</div>
 		<div class="p-col-12 p-md-3 p-col-nogutter">
@@ -35,12 +38,13 @@
 							type="unordered" itemType="none"
 							emptyMessage="Nenhum curso adicionado">
 							<f:facet name="header">
-            Meus Cursos
-        </f:facet>
-							<p:commandButton title="Remover" 
+								<h:outputText value="Meus Cursos" />
+							</f:facet>
+							<p:commandButton title="Remover"
 								action="#{matriculaController.remover}"
 								onclick="return confirm('Confirma a exclusão do Curso?')"
-								ajax="false" immediate="true" styleClass="ui-icon ui-icon-closethick"
+								ajax="false" immediate="true"
+								styleClass="ui-icon ui-icon-closethick"
 								style="float:left;margin-right:10px;">
 								<f:setPropertyActionListener value="#{mat}"
 									target="#{matriculaController.matricula}" />
@@ -62,8 +66,9 @@
 
 
 
-						<p:dataGrid value="#{matriculaController.listarDetalheCurso}" var="c"
-							columns="3" layout="grid" rows="12" paginator="true" id="cars"
+						<p:dataGrid value="#{matriculaController.listarDetalheCurso}"
+							var="c" columns="3" layout="grid" rows="12" paginator="true"
+							id="cars"
 							paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 							rowsPerPageTemplate="6,12,16">
 
@@ -87,8 +92,8 @@
 											target="#{matriculaController.curso}" immediate="true" />
 									</p:commandButton>
 									<p:commandButton title="Matricular" value="matricular"
-										action="#{matriculaController.salvar}"
-										icon="ui ui-icon-plus" ajax="false" immediate="true"
+										action="#{matriculaController.salvar}" icon="ui ui-icon-plus"
+										ajax="false" immediate="true"
 										style="background: #000099;color:#ffffff;">
 										<f:setPropertyActionListener value="#{c}"
 											target="#{matriculaController.curso}" />
@@ -134,7 +139,7 @@
 							</p:outputPanel>
 						</p:dialog>
 
-						
+
 					</h:form>
 				</div>
 			</div>

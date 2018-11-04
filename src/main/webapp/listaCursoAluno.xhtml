@@ -12,7 +12,7 @@
 	<link rel="stylesheet" type="text/css"
 		href="resources/css/primeflex.scss" />
 	<link rel="stylesheet" type="text/css" href="resources/css/estilo.css" />
-	<title>CheckIn</title>
+	<title>Matriculados</title>
 </h:head>
 <h:body>
 	<h:form>
@@ -33,37 +33,18 @@
 							icon="ui-icon-folder-open" />
 					</p:submenu>
 					<p:menuitem value="Voltar" url="listaCurso.xhtml"
-						icon="ui-icon-arrowreturnthick-1-w" />
+					icon="ui-icon-arrowreturnthick-1-w" />
 					<f:facet name="options">
 						<p:button href="logout" icon="ui-icon-extlink"></p:button>
 					</f:facet>
 				</p:menubar>
 			</div>
-			<div class="p-col-12 p-md-3 p-col-nogutter">
+			<div class="p-col-12 p-md-1 p-col-nogutter">
 				<div class="p-grid">
-					<div class="p-col-11">
-						<p:panelGrid columns="2">
-							<f:facet name="header">
-								<p:outputLabel value="Curso: #{matriculaController.curso.nome}" />
-							</f:facet>
-							<p:outputLabel for="mat" value="Matrícula: " />
-							<p:inputText id="mat"
-								value="#{matriculaController.matriculaAluno}" required="true"
-								requiredMessage="Informe o número da matrícula"
-								label="Matrícula: " />
-							<f:facet name="footer">
-								<div class="botao">
-									<p:commandButton value="Confirmar"
-										action="#{matriculaController.checkin}" ajax="false"
-										icon="ui-icon-circle-check"
-										style="background: #006400;color: #ffffff;" />
-								</div>
-							</f:facet>
-						</p:panelGrid>
-					</div>
+					<div class="p-col-12"></div>
 				</div>
 			</div>
-			<div class="p-col-12 p-md-9 p-col-nogutter">
+			<div class="p-col-12 p-md-10 p-col-nogutter">
 				<div class="p-grid">
 					<div class="p-col-12">
 						<p:dataTable value="#{matriculaController.listarAluno}" var="m"
@@ -82,11 +63,14 @@
 							<p:column headerText="CPF" style="text-align:center;">
 								<h:outputText value="#{m.id.aluno.cpf}" />
 							</p:column>
-							<p:column headerText="Status" style="text-align:center;">
-								<h:outputText value="#{m.statusPresenca.descricao}" />
-							</p:column>
 						</p:dataTable>
 					</div>
+				</div>
+			</div>
+
+			<div class="p-col-12 p-md-1 p-col-nogutter">
+				<div class="p-grid">
+					<div class="p-col-12"></div>
 				</div>
 			</div>
 

@@ -34,7 +34,6 @@ public class Aluno implements Serializable {
 	private Set<Matricula> matriculas = new HashSet<>();
 
 	public Aluno() {
-		super();
 	}
 
 	public Aluno(Long id, String nome, String email, String matricula, String cpf, Date dataNascimento,

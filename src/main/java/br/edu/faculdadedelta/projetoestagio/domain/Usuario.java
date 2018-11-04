@@ -1,45 +1,43 @@
 package br.edu.faculdadedelta.projetoestagio.domain;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
 
-import javax.persistence.CascadeType;
+import javax.persistence.CollectionTable;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.validation.constraints.NotEmpty;
 
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
+import br.edu.faculdadedelta.projetoestagio.domain.enums.Perfil;
 
 @Entity
-public class Usuario implements UserDetails, Serializable {
+public class Usuario implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@NotEmpty
 	private String login;
 	@NotEmpty
 	private String senha;
 
-	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "usuarios_roles", joinColumns = @JoinColumn(name = "usuario_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "role"))
-	private List<Role> roles = new ArrayList<>();
+	@ElementCollection(fetch = FetchType.EAGER)
+	@CollectionTable(name = "PERFIS")
+	private Set<Integer> perfis = new HashSet<>();
 
 	public Usuario() {
 		super();
 	}
 
-	public Usuario(Long id, String login, String senha) {
+	public Usuario(Long id, @NotEmpty String login, @NotEmpty String senha) {
 		super();
 		this.id = id;
 		this.login = login;
@@ -70,55 +68,14 @@ public class Usuario implements UserDetails, Serializable {
 		this.senha = senha;
 	}
 
-	public List<Role> getRoles() {
-		return roles;
+	public Set<Perfil> getPerfis() {
+		return perfis.stream().map(x -> Perfil.toEnum(x)).collect(Collectors.toSet());
 	}
 
-	public void setRoles(List<Role> roles) {
-		this.roles = roles;
+	public void addPerfil(Perfil perfil) {
+		perfis.add(perfil.getCod());
 	}
 
-	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-
-		return this.roles;
-	}
-
-	@Override
-	public String getPassword() {
-		// TODO Auto-generated method stub
-		return this.senha;
-	}
-
-	@Override
-	public String getUsername() {
-		// TODO Auto-generated method stub
-		return this.login;
-	}
-
-	@Override
-	public boolean isAccountNonExpired() {
-		// TODO Auto-generated method stub
-		return true;
-	}
-
-	@Override
-	public boolean isAccountNonLocked() {
-		// TODO Auto-generated method stub
-		return true;
-	}
-
-	@Override
-	public boolean isCredentialsNonExpired() {
-		// TODO Auto-generated method stub
-		return true;
-	}
-
-	@Override
-	public boolean isEnabled() {
-		// TODO Auto-generated method stub
-		return true;
-	}
 
 	@Override
 	public int hashCode() {

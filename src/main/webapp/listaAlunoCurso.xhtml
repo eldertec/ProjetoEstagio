@@ -12,7 +12,7 @@
 		href="resources/css/primeflex.css" />
 	<link rel="stylesheet" type="text/css"
 		href="resources/css/primeflex.scss" />
-	<title>Faculdade Delta</title>
+	<title>Alunos</title>
 
 </h:head>
 <h:body>
@@ -23,7 +23,18 @@
 				<p:menuitem value="Home" url="homeCoordenador.xhtml"
 					icon="ui-icon-home" />
 				<p:menuitem value="Meus Dados" url="cadastroUsuarioLogado.xhtml"
+					icon="ui-icon-pencil" />
+				<p:menuitem value="Cursos" url="cadastroCurso.xhtml"
 					icon="ui-icon-note" />
+				<p:submenu label="Listar" icon="ui-icon-document">
+					<p:menuitem value="Alunos" url="listaAlunoCurso.xhtml"
+						icon="ui-icon-person" />
+					<p:menuitem value="Cursos" url="listaCurso.xhtml"
+						icon="ui-icon-folder-open" />
+				</p:submenu>
+				<f:facet name="options">
+					<p:button href="logout" icon="ui-icon-extlink"></p:button>
+				</f:facet>
 			</p:menubar>
 		</div>
 		<div class="p-col-12 p-md-1 p-col-nogutter">
@@ -37,21 +48,16 @@
 				<div class="p-col-12">
 					<h:form id="form">
 						<p:growl />
-						<p:dataTable value="#{matriculaController.listar}" var="m"
-							sortBy="#{m.id.curso.nome}" expandableRowGroups="true">
+						<p:dataTable value="#{alunoController.listar}" var="m" 
+						emptyMessage="Nenhum Aluno Cadastrado">
 							<f:facet name="header">
-								<h:outputText value="Alunos por Cursos" />
+								<h:outputText value="Alunos Cadastrados" />
 							</f:facet>
-							<p:headerRow>
-								<p:column colspan="2">
-									<h:outputText value="#{m.id.curso.nome}" />
-								</p:column>
-							</p:headerRow>
 							<p:column headerText="Aluno" style="text-align:center;">
-								<h:outputText value="#{m.id.aluno.nome}" />
+								<h:outputText value="#{m.nome}" />
 							</p:column>
 							<p:column headerText="Matricula" style="text-align:center;">
-								<h:outputText value="#{m.id.aluno.matricula}" />
+								<h:outputText value="#{m.matricula}" />
 							</p:column>
 						</p:dataTable>
 					</h:form>
