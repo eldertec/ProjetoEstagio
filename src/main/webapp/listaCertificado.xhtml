@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<h:head>
+	<meta charset="UTF-8" />
+	<link rel="stylesheet" type="text/css" href="resources/css/estilo.css" />
+	<link rel="stylesheet" type="text/css"
+		href="resources/css/primeflex.css" />
+	<link rel="stylesheet" type="text/css"
+		href="resources/css/primeflex.scss" />
+	<title>Certificados</title>
+
+</h:head>
+<h:body>
+
+	<div class="p-grid">
+		<div class="p-col-12 p-col-nogutter">
+			<p:menubar>
+				<p:menuitem value="Home" url="homeAluno.xhtml"
+					icon="ui-icon-home" />
+				<p:menuitem value="Meus Dados" url="cadastroAluno.xhtml"
+					icon="ui-icon-pencil" />
+				<p:menuitem value="Cursos" url="matricula.xhtml" icon="ui-icon-note" />
+				<f:facet name="options">
+					<p:button href="logout" icon="ui-icon-extlink"></p:button>
+				</f:facet>
+			</p:menubar>
+		</div>
+		<div class="p-col-12 p-md-1 p-col-nogutter">
+			<div class="p-grid">
+				<div class="p-col-12"></div>
+			</div>
+		</div>
+
+		<div class="p-col-12 p-md-10 p-col-nogutter">
+			<div class="p-grid">
+				<div class="p-col-12">
+					<h:form id="form">
+						<p:growl />
+						<p:dataTable value="#{matriculaController.listarCertificado}" var="m"
+							resizableColumns="true" emptyMessage="Nenhum Certificado disponível"
+							style="width:98.5%;">
+							<f:facet name="header">
+								<h:outputText value="Cursos com Certificado" />
+							</f:facet>
+							<p:column headerText="Curso" style="text-align:center;">
+								<h:outputText value="#{m.id.curso.nome}" />
+							</p:column>
+							<p:column headerText="Instrutor" style="text-align:center;">
+								<h:outputText value="#{m.id.curso.instrutor.nome}" />
+							</p:column>
+							<p:column headerText="Data" style="text-align:center;">
+								<h:outputText value="#{m.id.curso.data}">
+									<f:convertDateTime pattern="dd/MM/yyyy"
+										timeZone="America/Sao_Paulo" />
+								</h:outputText>
+							</p:column>
+							<p:column headerText="Certificado" style="text-align:center;">
+								<p:commandButton action="#{certificadoController.createPdf}"
+									icon="ui ui-icon-calendar" title="Certificado do Curso"
+									ajax="false">
+									<f:setPropertyActionListener value="#{m}"
+										target="#{certificadoController.matricula}" immediate="true" />
+								</p:commandButton>
+							</p:column>
+						</p:dataTable>
+					</h:form>
+				</div>
+			</div>
+		</div>
+
+		<div class="p-col-12 p-md-1 p-col-nogutter">
+			<div class="p-grid">
+				<div class="p-col-12"></div>
+			</div>
+		</div>
+
+		<div class="p-col-12">
+			<div class="rodape">
+				<h:outputText style="margin-top: -4px;font-size:12px;"
+					value="6º Período/Estágio Supervisionado" />
+				<br />
+				<h:outputText style="font-size:14px;margin-right: 16px;"
+					value="Sistemas de Informação" />
+			</div>
+		</div>
+	</div>
+</h:body>
+</html>

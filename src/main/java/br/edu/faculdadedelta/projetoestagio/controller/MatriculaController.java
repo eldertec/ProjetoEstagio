@@ -130,6 +130,20 @@ public class MatriculaController {
 		return matriculas;
 	}
 	
+	public List<Matricula> getListarCertificado(){
+		List<Matricula> matriculas = new ArrayList<>();
+		matriculas = getListarMeusCursos();
+		List<Matricula> presente = new ArrayList<>();
+		if(!matriculas.isEmpty()) {
+			for(Matricula m : matriculas) {
+				if(m.getStatusPresenca().getCod() == 1) {
+					presente.add(m);
+				}
+			}
+		}
+		return presente;
+	}
+	
 	public String checkin() {
 		List<Matricula> cursos = new ArrayList<>();
 		Aluno presente = alunoRepository.findByMatricula(matriculaAluno);

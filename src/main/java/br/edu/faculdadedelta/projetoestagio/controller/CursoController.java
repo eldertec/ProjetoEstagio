@@ -115,5 +115,17 @@ public class CursoController {
 		cursos = cursoRepository.findAll();
 		return cursos;
 	}
+	
+	public String testar() {
+		String saida = new String();
+		Optional<Curso> busca = cursoRepository.findById((long) 5);
+		Curso teste = busca.get(); 
+		String[] corta = teste.getNome().split("");
+		for(String c : corta) {
+			 saida = saida.concat(c.trim());
+		}
+		System.out.println(saida.toLowerCase());
+		return "teste.xhtml";
+	}
 
 }
