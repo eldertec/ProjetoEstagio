@@ -14,27 +14,33 @@
 </h:head>
 <h:body>
 	<h:form>
-		<p:menubar>
-			<p:menuitem value="Meus Dados" url="cadastroUsuarioLogado.xhtml"
-				icon="ui-icon-pencil" />
-			<p:menuitem value="Cursos" url="cadastroCurso.xhtml"
-				icon="ui-icon-note" />
-			<p:submenu label="Listar" icon="ui-icon-document">
-				<p:menuitem value="Alunos" url="listaAlunoCurso.xhtml"
-					icon="ui-icon-person" />
-				<p:menuitem value="Cursos" url="listaCurso.xhtml"
-					icon="ui-icon-folder-open" />
-			</p:submenu>
-			<f:facet name="options">
-				<p:button href="logout" icon="ui-icon-extlink"></p:button>
-			</f:facet>
-		</p:menubar>
-		<div class="rodape">
-			<h:outputText style="margin-top: -4px;font-size:12px;"
-				value="6º Período/Estágio Supervisionado" />
-			<br />
-			<h:outputText style="font-size:14px;margin-right: 16px;"
-				value="Sistemas de Informação" />
+		<div class="p-grid">
+			<div class="p-col-12 p-col-nogutter">
+				<p:menubar>
+					<p:menuitem value="Meus Dados" url="cadastroUsuarioLogado.xhtml"
+						icon="ui-icon-pencil" />
+					<p:menuitem value="Cursos" url="cadastroCurso.xhtml"
+						icon="ui-icon-note" />
+					<p:submenu label="Listar" icon="ui-icon-document">
+						<p:menuitem value="Alunos" url="listaAlunoCurso.xhtml"
+							icon="ui-icon-person" />
+						<p:menuitem value="Cursos" url="listaCurso.xhtml"
+							icon="ui-icon-folder-open" />
+					</p:submenu>
+					<f:facet name="options">
+						<p:button href="logout" icon="ui-icon-extlink"></p:button>
+					</f:facet>
+				</p:menubar>
+			</div>
+			<div class="p-col-12">
+				<div class="rodape">
+					<h:outputText style="margin-top: -4px;font-size:12px;"
+						value="6º Período/Estágio Supervisionado" />
+					<br />
+					<h:outputText style="font-size:14px;margin-right: 16px;"
+						value="Sistemas de Informação" />
+				</div>
+			</div>
 		</div>
 	</h:form>
 </h:body>

@@ -55,7 +55,7 @@
 									value="Matriculados no curso: #{matriculaController.curso.nome}" />
 							</f:facet>
 							<p:column headerText="Aluno" style="text-align:center;">
-								<h:outputText value="#{m.id.aluno.nome}" />
+								<h:outputText value="#{m.id.aluno.nome} #{m.id.aluno.sobrenome}"  />
 							</p:column>
 							<p:column headerText="Matrícula" style="text-align:center;">
 								<h:outputText value="#{m.id.aluno.matricula}" />

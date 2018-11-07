@@ -12,33 +12,31 @@
 		href="resources/css/primeflex.css" />
 	<link rel="stylesheet" type="text/css"
 		href="resources/css/primeflex.scss" />
-	<title>Faculdade Delta</title>
+	<title>Download</title>
 </h:head>
 <h:body>
 	<h:form>
 		<div class="p-grid">
 			<div class="p-col-12 p-col-nogutter">
 				<p:menubar>
-					<p:menuitem value="Home" url="index.xhtml" icon="ui-icon-home" />
-					<p:menuitem value="Alunos" url="cadastroAluno.xhtml"
-						icon="ui-icon-pencil" />
-					<p:menuitem value="Cursos" url="cadastroCurso.xhtml"
-						icon="ui-icon-note" />
-					<p:menuitem value="Usuários" url="cadastroUsuario.xhtml"
-						icon="ui-icon-note" />
+					<p:menuitem value="Home" url="homeAluno.xhtml" icon="ui-icon-home" />
+				<p:menuitem value="Meus Dados" url="cadastroAluno.xhtml"
+					icon="ui-icon-pencil" />
+				<p:menuitem value="Cursos" url="matricula.xhtml" icon="ui-icon-note" />
+				<p:menuitem value="Voltar" url="listaCertificado.xhtml"
+						icon="ui-icon-arrowreturnthick-1-w" />
+				<f:facet name="options">
+					<p:button href="logout" icon="ui-icon-extlink"></p:button>
+				</f:facet>
 				</p:menubar>
 			</div>
-			<div class="p-col-12 p-md-3 p-col-nogutter">
-				<div class="p-grid">
-					<div class="p-col-11">
-						Cadastro
-					</div>
-				</div>
-			</div>
-			<div class="p-col-12 p-md-9 p-col-nogutter">
+			<div class="p-col-12 p-md-12 p-col-nogutter">
 				<div class="p-grid">
 					<div class="p-col-12">
-						Listagem
+						<p:media value="./resources/pdfs/#{certificadoController.nomeArquivo}" width="100%"
+							height="900px">
+							<h:outputLink value="./resources/pdfs/#{certificadoController.nomeArquivo}"></h:outputLink>
+						</p:media>
 					</div>
 				</div>
 			</div>
