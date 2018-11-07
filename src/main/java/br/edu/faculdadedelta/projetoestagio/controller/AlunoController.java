@@ -65,7 +65,7 @@ public class AlunoController {
 			alunoRepository.save(aluno);
 			limpar();
 			FacesUtil.exibirMsg("Cadastro realizado com sucesso!");
-			return "/";
+			return "index.xhtml";
 		}else {
 			alunoRepository.save(aluno);
 			FacesUtil.exibirMsg("Cadastro atualizado com sucesso!");

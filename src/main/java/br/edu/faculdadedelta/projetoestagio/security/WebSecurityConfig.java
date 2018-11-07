@@ -21,9 +21,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private ImplementsUserDetailsService userDetailsService;
 
-	private static final String[] PUBLIC_MATCHERS_GET = { "/index.xhtml" };
+	private static final String[] PUBLIC_MATCHERS_GET = { "/index.xhtml"};
 
-	private static final String[] PUBLIC_MATCHERS_POST = { "/index.xhtml" };
+	private static final String[] PUBLIC_MATCHERS_POST = { "/index.xhtml"};
 
 	public WebSecurityConfig() {
 		super();
