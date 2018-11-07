@@ -14,22 +14,30 @@
 </h:head>
 <h:body>
 	<h:form>
-		<p:menubar>
-			<p:menuitem value="Meus Dados" url="cadastroAluno.xhtml"
-				icon="ui-icon-pencil" />
-			<p:menuitem value="Cursos" url="matricula.xhtml" icon="ui-icon-note" />
-			<p:menuitem value="Certificados" url="listaCertificado.xhtml" icon="ui-icon-script" />
-			<f:facet name="options">
-				<p:button href="logout" icon="ui-icon-extlink"></p:button>
-			</f:facet>
-		</p:menubar>
-		<h1>Aluno</h1>
-		<div class="rodape">
-			<h:outputText style="margin-top: -4px;font-size:12px;"
-				value="6º Período/Estágio Supervisionado" />
-			<br />
-			<h:outputText style="font-size:14px;margin-right: 16px;"
-				value="Sistemas de Informação" />
+		<div class="p-grid">
+			<div class="p-col-12 p-col-nogutter">
+				<p:menubar>
+					<p:menuitem value="Meus Dados" url="cadastroAluno.xhtml"
+						icon="ui-icon-pencil" />
+					<p:menuitem value="Cursos" url="matricula.xhtml"
+						icon="ui-icon-note" />
+					<p:menuitem value="Certificados" url="listaCertificado.xhtml"
+						icon="ui-icon-script" />
+					<f:facet name="options">
+						<p:button href="logout" icon="ui-icon-extlink"></p:button>
+					</f:facet>
+				</p:menubar>
+			</div>
+			<h1>Aluno</h1>
+			<div class="p-col-12">
+				<div class="rodape">
+					<h:outputText style="margin-top: -4px;font-size:12px;"
+						value="6º Período/Estágio Supervisionado" />
+					<br />
+					<h:outputText style="font-size:14px;margin-right: 16px;"
+						value="Sistemas de Informação" />
+				</div>
+			</div>
 		</div>
 	</h:form>
 </h:body>

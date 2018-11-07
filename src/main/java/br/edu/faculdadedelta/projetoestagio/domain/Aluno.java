@@ -21,6 +21,7 @@ public class Aluno implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String nome;
+	private String sobrenome;
 	private String email;
 	private String matricula;
 	private String cpf;
@@ -36,11 +37,12 @@ public class Aluno implements Serializable {
 	public Aluno() {
 	}
 
-	public Aluno(Long id, String nome, String email, String matricula, String cpf, Date dataNascimento,
-			Usuario usuario) {
+	public Aluno(Long id, String nome, String sobrenome, String email, String matricula, String cpf,
+			Date dataNascimento, Usuario usuario) {
 		super();
 		this.id = id;
 		this.nome = nome;
+		this.sobrenome = sobrenome;
 		this.email = email;
 		this.matricula = matricula;
 		this.cpf = cpf;
@@ -78,6 +80,14 @@ public class Aluno implements Serializable {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	public String getSobrenome() {
+		return sobrenome;
+	}
+
+	public void setSobrenome(String sobrenome) {
+		this.sobrenome = sobrenome;
 	}
 
 	public String getEmail() {

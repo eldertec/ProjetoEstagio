@@ -12,11 +12,15 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import br.edu.faculdadedelta.projetoestagio.domain.Aluno;
 import br.edu.faculdadedelta.projetoestagio.domain.Curso;
 import br.edu.faculdadedelta.projetoestagio.domain.Instrutor;
+import br.edu.faculdadedelta.projetoestagio.domain.Matricula;
 import br.edu.faculdadedelta.projetoestagio.domain.Usuario;
 import br.edu.faculdadedelta.projetoestagio.domain.enums.Perfil;
+import br.edu.faculdadedelta.projetoestagio.domain.enums.StatusPagamento;
+import br.edu.faculdadedelta.projetoestagio.domain.enums.StatusPresenca;
 import br.edu.faculdadedelta.projetoestagio.repositories.AlunoRepository;
 import br.edu.faculdadedelta.projetoestagio.repositories.CursoRepository;
 import br.edu.faculdadedelta.projetoestagio.repositories.InstrutorRepository;
+import br.edu.faculdadedelta.projetoestagio.repositories.MatriculaRepository;
 import br.edu.faculdadedelta.projetoestagio.repositories.UsuarioRepository;
 
 @SpringBootApplication
@@ -31,6 +35,9 @@ public class ProjetoEstagioApplication implements CommandLineRunner {
 	
 	@Autowired
 	private CursoRepository cursoRepository;
+	
+	@Autowired
+	private MatriculaRepository matriculaRepository;
 	
 
 	public static void main(String[] args) {
@@ -48,6 +55,7 @@ public class ProjetoEstagioApplication implements CommandLineRunner {
 		Usuario userAluno4 = new Usuario(null, "lucianna@gmail.com", new BCryptPasswordEncoder().encode("12345"));
 		Usuario userAluno5 = new Usuario(null, "walter@gmail.com", new BCryptPasswordEncoder().encode("12345"));
 		Usuario userAluno6 = new Usuario(null, "jonas@gmail.com", new BCryptPasswordEncoder().encode("12345"));
+		
 
 		usuario.addPerfil(Perfil.ADMIN);
 		
@@ -66,12 +74,12 @@ public class ProjetoEstagioApplication implements CommandLineRunner {
 
 		instrutorRepository.saveAll(Arrays.asList(i1, i2, i3));
 		
-		Aluno aluno = new Aluno(null, "Bruno", "bruno@gmail.com", "010101", "66633322211", new Date(), userAluno);
-		Aluno aluno2 = new Aluno(null, "Iara", "iara@gmail.com", "020202", "66633322210", new Date(), userAluno2);
-		Aluno aluno3 = new Aluno(null, "Samuel", "samuel@gmail.com", "030303", "66633322212", new Date(), userAluno3);
-		Aluno aluno4 = new Aluno(null, "Lucianna", "lucianna@gmail.com", "040404", "66633322213", new Date(), userAluno4);
-		Aluno aluno5 = new Aluno(null, "Walter", "walter@gmail.com", "050505", "66633322214", new Date(), userAluno5);
-		Aluno aluno6 = new Aluno(null, "Jonas", "jonas@gmail.com", "060606", "66633322215", new Date(), userAluno6);
+		Aluno aluno = new Aluno(null, "Bruno", "Rezende" ,"bruno@gmail.com", "010101", "66633322211", new Date(), userAluno);
+		Aluno aluno2 = new Aluno(null, "Iara", "Neves Esteves" ,"iara@gmail.com", "020202", "66633322210", new Date(), userAluno2);
+		Aluno aluno3 = new Aluno(null, "Samuel", "Freitas" ,"samuel@gmail.com", "030303", "66633322212", new Date(), userAluno3);
+		Aluno aluno4 = new Aluno(null, "Lucianna", "Xavier" ,"lucianna@gmail.com", "040404", "66633322213", new Date(), userAluno4);
+		Aluno aluno5 = new Aluno(null, "Walter", "Paulo" ,"walter@gmail.com", "050505", "66633322214", new Date(), userAluno5);
+		Aluno aluno6 = new Aluno(null, "Jonas", "Souza" ,"jonas@gmail.com", "060606", "66633322215", new Date(), userAluno6);
 		
 		alunoRepository.saveAll(Arrays.asList(aluno,aluno2,aluno3,aluno4,aluno5,aluno6));
 		
@@ -91,7 +99,9 @@ public class ProjetoEstagioApplication implements CommandLineRunner {
 		
 		cursoRepository.saveAll(Arrays.asList(c1, c2, c3,c4,c5,c6,c7,c8,c9));
 		
+		Matricula m1 = new Matricula(aluno2, c1, new Date(), StatusPagamento.AGUARDANDO, StatusPresenca.PRESENTE);
 		
+		matriculaRepository.save(m1);
 
 	}
 }

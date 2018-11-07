@@ -39,8 +39,16 @@
 							<p:inputText id="nome" value="#{alunoController.aluno.nome}"
 								required="true"
 								requiredMessage="O nome do aluno deve ser informado"
-								validatorMessage="O nome deve ter no máximo 100 caracteres"
+								validatorMessage="O nome deve ter no máximo 30 caracteres"
 								label="Nome: ">
+								<f:validateLength maximum="30" />
+							</p:inputText>
+							<p:outputLabel for="sobre" value="Sobrenome: " />
+							<p:inputText id="sobre" value="#{alunoController.aluno.sobrenome}"
+								required="true"
+								requiredMessage="O sobrenome deve ser informado"
+								validatorMessage="O sobrennome deve ter no máximo 100 caracteres"
+								label="Sobrenome: ">
 								<f:validateLength maximum="100" />
 							</p:inputText>
 							<p:outputLabel for="mat" value="Matrícula: " />
@@ -95,7 +103,7 @@
 								<h:outputText value="Meus Dados" />
 							</f:facet>
 							<p:column headerText="Nome" style="text-align:center;">
-								<h:outputText value="#{a.nome}" />
+								<h:outputText value="#{a.nome} #{a.sobrenome}" />
 							</p:column>
 							<p:column headerText="Email" style="text-align:center;">
 								<h:outputText value="#{a.email}" />
