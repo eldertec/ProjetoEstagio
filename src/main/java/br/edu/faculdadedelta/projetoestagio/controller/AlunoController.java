@@ -51,7 +51,7 @@ public class AlunoController {
 	public String limpar() {
 		usuario = new Usuario();
 		aluno = new Aluno();
-		return "cadastroAluno.xhtml";
+		return "";
 	}
 
 	@RequestMapping(value = "/", method = RequestMethod.POST)

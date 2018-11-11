@@ -29,14 +29,22 @@ public class InstrutorController {
 	public void setInstrutor(Instrutor instrutor) {
 		this.instrutor = instrutor;
 	}
+	
+	public String limpar() {
+		instrutor = new Instrutor();
+		return "cadastroInstrutor.xhtml";
+	}
+	
 
 	public String salvar() {
 		if (instrutor.getId() == null) {
 			repo.save(instrutor);
 			FacesUtil.exibirMsg("Instrutor cadastrado com sucesso!");
+			limpar();
 		} else {
 			repo.save(instrutor);
 			FacesUtil.exibirMsg("Instrutor atualizado com sucesso!");
+			limpar();
 		}
 		return "cadastroInstrutor.xhtml";
 	}
@@ -48,7 +56,8 @@ public class InstrutorController {
 	public String remover() {
 		repo.delete(instrutor);
 		FacesUtil.exibirMsg("Instrutor removido com sucesso!");
-		return "listaInstrutor.xhtml";
+		limpar();
+		return "cadastroInstrutor.xhtml";
 	}
 
 	public List<Instrutor> getListar() {

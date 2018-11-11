@@ -91,7 +91,7 @@ public class ProjetoEstagioApplication implements CommandLineRunner {
 		Curso c6 = new Curso(null, "Inteligência Artificial", "Qualquer coisa", "Delta", new Date(), "15:00", "3 horas", 50.0, 20, i3);
 		Curso c7 = new Curso(null, "Php", "Qualquer coisa", "Delta", new Date(), "15:00", "3 horas", 50.0, 20, i1);
 		Curso c8 = new Curso(null, "Scrum", "Qualquer coisa", "Delta", new Date(), "15:00", "3 horas", 50.0, 20, i2);
-		Curso c9 = new Curso(null, "Spring Boot", "Qualquer coisa", "Delta", new Date(), "15:00", "3 horas", 50.0, 20, i3);
+		Curso c9 = new Curso(null, "Spring Boot", "Qualquer coisa", "Delta", new Date(), "15:00", "3 horas", 50.0, 2, i3);
 		
 		i1.getCursos().addAll(Arrays.asList(c1,c4,c7));
 		i2.getCursos().addAll(Arrays.asList(c2,c5,c8));

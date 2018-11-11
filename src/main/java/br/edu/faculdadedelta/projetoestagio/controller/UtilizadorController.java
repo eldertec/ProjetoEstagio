@@ -17,6 +17,8 @@ import br.edu.faculdadedelta.projetoestagio.domain.enums.Perfil;
 import br.edu.faculdadedelta.projetoestagio.domain.enums.TipoUtilizador;
 import br.edu.faculdadedelta.projetoestagio.repositories.UsuarioRepository;
 import br.edu.faculdadedelta.projetoestagio.repositories.UtilizadorRepository;
+import br.edu.faculdadedelta.projetoestagio.security.UserSS;
+import br.edu.faculdadedelta.projetoestagio.service.UsuarioService;
 import br.edu.faculdadedelta.projetoestagio.util.FacesUtil;
 
 @Controller
@@ -55,6 +57,12 @@ public class UtilizadorController {
 		usuario = new Usuario();
 		return "cadastroUsuario.xhtml";
 	}
+	
+	public String limparLogado() {
+		utilizador = new Utilizador();
+		usuario = new Usuario();
+		return "cadastroUsuarioLogado.xhtml";
+	}
 
 	public String salvar() {
 		if (utilizador.getId() == null) {
@@ -73,18 +81,20 @@ public class UtilizadorController {
 			repo.save(utilizador);
 			FacesUtil.exibirMsg("Cadastro realizado com sucesso!");
 			limpar();
+			return "cadastroUsuario.xhtml";
 		} else {
 			repo.save(utilizador);
 			FacesUtil.exibirMsg("Cadastro atualizado com sucesso!");
 			limpar();
+			return "cadastroUsuarioLogado.xhtml";
 		}
 
-		return "cadastroUsuario.xhtml";
+		
 	}
 
 	public String atualizar() {
 
-		return "cadastroUsuario.xhtml";
+		return "cadastroUsuarioLogado.xhtml";
 	}
 
 	public String remover() {
@@ -99,6 +109,16 @@ public class UtilizadorController {
 		List<Utilizador> utilizadores = new ArrayList<>();
 		utilizadores = repo.findAll();
 		return utilizadores;
+	}
+	
+	public List<Utilizador> getListarLogado() {
+		List<Utilizador> userlogado = new ArrayList<>();
+		UserSS logado = UsuarioService.logado();
+		if(logado != null) {
+			utilizador = repo.findByUsuarioId(logado.getId());
+			userlogado.add(utilizador);
+		}
+		return userlogado;
 	}
 
 	public TipoUtilizador[] getTipos() {

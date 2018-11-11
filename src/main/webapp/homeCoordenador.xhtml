@@ -19,8 +19,12 @@
 				<p:menubar>
 					<p:menuitem value="Meus Dados" url="cadastroUsuarioLogado.xhtml"
 						icon="ui-icon-pencil" />
-					<p:menuitem value="Cursos" url="cadastroCurso.xhtml"
-						icon="ui-icon-note" />
+					<p:submenu label="Cadastrar" icon="ui-icon-plusthick">
+						<p:menuitem value="Cursos" url="cadastroCurso.xhtml"
+							icon="ui-icon-note" />
+						<p:menuitem value="Instrutores" url="cadastroInstrutor.xhtml"
+							icon="ui-icon-person" />
+					</p:submenu>
 					<p:submenu label="Listar" icon="ui-icon-document">
 						<p:menuitem value="Alunos" url="listaAlunoCurso.xhtml"
 							icon="ui-icon-person" />

@@ -32,6 +32,7 @@ public class Curso implements Serializable {
 	private String duracao;
 	private Double valor;
 	private Integer qtdVaga;
+	private Integer vagasDisponiveis;
 
 	@ManyToOne
 	@JoinColumn(name = "instrutor_id")
@@ -145,6 +146,15 @@ public class Curso implements Serializable {
 
 	public void setMatriculas(Set<Matricula> matriculas) {
 		this.matriculas = matriculas;
+	}
+	
+	public Integer getVagasDisponiveis() {
+		vagasDisponiveis = (qtdVaga - matriculas.size());
+		return vagasDisponiveis;
+	}
+
+	public void setVagasDisponiveis(Integer vagasDisponiveis) {
+		this.vagasDisponiveis = vagasDisponiveis;
 	}
 
 	@Override

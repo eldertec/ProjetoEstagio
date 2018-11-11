@@ -24,8 +24,12 @@
 					icon="ui-icon-home" />
 				<p:menuitem value="Meus Dados" url="cadastroUsuarioLogado.xhtml"
 					icon="ui-icon-pencil" />
-				<p:menuitem value="Cursos" url="cadastroCurso.xhtml"
-					icon="ui-icon-note" />
+				<p:submenu label="Cadastrar" icon="ui-icon-plusthick">
+					<p:menuitem value="Cursos" url="cadastroCurso.xhtml"
+						icon="ui-icon-note" />
+					<p:menuitem value="Instrutores" url="cadastroInstrutor.xhtml"
+						icon="ui-icon-person" />
+				</p:submenu>
 				<p:submenu label="Listar" icon="ui-icon-document">
 					<p:menuitem value="Alunos" url="listaAlunoCurso.xhtml"
 						icon="ui-icon-person" />
@@ -69,7 +73,7 @@
 							</p:column>
 							<p:column headerText="Opções" style="text-align:center;">
 								<p:commandButton action="#{matriculaController.abrirCheckin}"
-									icon="ui ui-icon-calendar" title="CheckIn do Curso"
+									icon="ui ui-icon-calendar" title="Check-in do Curso"
 									ajax="false">
 									<f:setPropertyActionListener value="#{c}"
 										target="#{matriculaController.curso}" immediate="true" />

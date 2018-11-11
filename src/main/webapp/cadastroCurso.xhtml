@@ -24,6 +24,10 @@
 					icon="ui-icon-home" />
 				<p:menuitem value="Meus Dados" url="cadastroUsuarioLogado.xhtml"
 					icon="ui-icon-note" />
+				<p:submenu label="Cadastrar" icon="ui-icon-plusthick">
+					<p:menuitem value="Instrutores" url="cadastroInstrutor.xhtml"
+						icon="ui-icon-person" />
+				</p:submenu>
 				<p:submenu label="Listar" icon="ui-icon-document">
 					<p:menuitem value="Alunos" url="listaAlunoCurso.xhtml"
 						icon="ui-icon-person" />
@@ -99,6 +103,7 @@
 								</div>
 							</f:facet>
 						</p:panelGrid>
+
 					</h:form>
 				</div>
 			</div>
