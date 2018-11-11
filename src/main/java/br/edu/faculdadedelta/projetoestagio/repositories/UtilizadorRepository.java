@@ -8,4 +8,5 @@ import br.edu.faculdadedelta.projetoestagio.domain.Utilizador;
 @Repository
 public interface UtilizadorRepository extends JpaRepository<Utilizador, Long> {
 
+	Utilizador findByUsuarioId(Long id);
 }

@@ -24,11 +24,13 @@
 					icon="ui-icon-home" />
 				<p:menuitem value="Meus Dados" url="cadastroUsuarioLogado.xhtml"
 					icon="ui-icon-pencil" />
-				<p:menuitem value="Cursos" url="cadastroCurso.xhtml"
-					icon="ui-icon-note" />
-				<p:submenu label="Listar" icon="ui-icon-document">
-					<p:menuitem value="Alunos" url="listaAlunoCurso.xhtml"
+				<p:submenu label="Cadastrar" icon="ui-icon-plusthick">
+					<p:menuitem value="Cursos" url="cadastroCurso.xhtml"
+						icon="ui-icon-note" />
+					<p:menuitem value="Instrutores" url="cadastroInstrutor.xhtml"
 						icon="ui-icon-person" />
+				</p:submenu>
+				<p:submenu label="Listar" icon="ui-icon-document">
 					<p:menuitem value="Cursos" url="listaCurso.xhtml"
 						icon="ui-icon-folder-open" />
 				</p:submenu>
@@ -48,13 +50,13 @@
 				<div class="p-col-12">
 					<h:form id="form">
 						<p:growl />
-						<p:dataTable value="#{alunoController.listar}" var="m" 
-						emptyMessage="Nenhum Aluno Cadastrado">
+						<p:dataTable value="#{alunoController.listar}" var="m"
+							emptyMessage="Nenhum Aluno Cadastrado">
 							<f:facet name="header">
 								<h:outputText value="Alunos Cadastrados" />
 							</f:facet>
 							<p:column headerText="Aluno" style="text-align:center;">
-								<h:outputText value="#{m.nome} #{m.sobrenome}"  />
+								<h:outputText value="#{m.nome} #{m.sobrenome}" />
 							</p:column>
 							<p:column headerText="Matricula" style="text-align:center;">
 								<h:outputText value="#{m.matricula}" />

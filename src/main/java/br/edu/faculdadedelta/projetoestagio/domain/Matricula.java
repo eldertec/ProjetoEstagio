@@ -19,6 +19,7 @@ public class Matricula implements Serializable {
 	private Date dataMatricula;
 	private Integer statusPagamento;
 	private Integer statusPresenca;
+	
 
 	public Matricula() {
 	}
@@ -32,7 +33,7 @@ public class Matricula implements Serializable {
 		this.statusPagamento = statusPagamento.getCod();
 		this.statusPresenca = statusPresenca.getCod();
 	}
-
+	
 	public Aluno getAluno() {
 		return id.getAluno();
 	}
@@ -80,6 +81,7 @@ public class Matricula implements Serializable {
 	public void setStatusPresenca(StatusPresenca statusPresenca) {
 		this.statusPresenca = statusPresenca.getCod();
 	}
+	
 
 	@Override
 	public int hashCode() {

@@ -88,6 +88,16 @@ public class MatriculaController {
 	}
 
 	public String salvar() {
+		for(Matricula a : getListarMeusCursos()) {
+			if(a.getCurso().equals(curso)) {
+				FacesUtil.exibirMsg("Você já está matriculado nesse curso");
+				return "matricula.xhtml";
+			}
+		}
+		if(curso.getVagasDisponiveis() <= 0) {
+			FacesUtil.exibirMsg("Esse Curso está lotado!\nSelecione outro Curso");
+			return "matricula.xhtml";
+		}
 		logado = logado();
 		matricula.getId().setAluno(logado);
 		matricula.getId().setCurso(curso);
@@ -153,7 +163,7 @@ public class MatriculaController {
 				m.setStatusPresenca(StatusPresenca.PRESENTE);
 				repo.save(m);
 				limpar();
-				FacesUtil.exibirMsg("Checkin realizado com sucesso!");
+				FacesUtil.exibirMsg("Check-in realizado com sucesso!");
 				return "checkin.xhtml";
 			}
 		}

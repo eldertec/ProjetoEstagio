@@ -1,0 +1,130 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+	<link rel="stylesheet" type="text/css"
+		href="resources/css/primeflex.css" />
+	<link rel="stylesheet" type="text/css"
+		href="resources/css/primeflex.scss" />
+	<link rel="stylesheet" type="text/css" href="resources/css/estilo.css" />
+	<title>Instrutores</title>
+</h:head>
+<h:body>
+	<h:form>
+		<p:growl />
+		<div class="p-grid">
+			<div class="p-col-12 p-col-nogutter">
+				<p:menubar>
+					<p:menuitem value="Home" url="homeCoordenador.xhtml"
+					icon="ui-icon-home" />
+				<p:menuitem value="Meus Dados" url="cadastroUsuarioLogado.xhtml"
+					icon="ui-icon-note" />
+				<p:submenu label="Cadastrar" icon="ui-icon-plusthick">
+					<p:menuitem value="Cursos" url="cadastroCurso.xhtml"
+							icon="ui-icon-note" />
+				</p:submenu>
+				<p:submenu label="Listar" icon="ui-icon-document">
+					<p:menuitem value="Alunos" url="listaAlunoCurso.xhtml"
+						icon="ui-icon-person" />
+					<p:menuitem value="Cursos" url="listaCurso.xhtml"
+						icon="ui-icon-folder-open" />
+				</p:submenu>
+				<f:facet name="options">
+					<p:button href="logout" icon="ui-icon-extlink"></p:button>
+				</f:facet>
+				</p:menubar>
+			</div>
+			<div class="p-col-12 p-md-3 p-col-nogutter">
+				<div class="p-grid">
+					<div class="p-col-11">
+						<p:panelGrid columns="2">
+							<f:facet name="header">
+								<p:outputLabel value="Novo Instrutor" />
+							</f:facet>
+							<p:outputLabel for="nomeI" value="Nome: " />
+							<p:inputText id="nomeI" value="#{instrutorController.instrutor.nome}"
+								required="true"
+								requiredMessage="O campo Nome é obrigatório." />
+							<p:outputLabel for="descI" value="Descrição: " />
+							<p:inputTextarea id="descI" rows="3" cols="20"
+								value="#{instrutorController.instrutor.descricao}" required="true"
+								requiredMessage="O campo Descrição é obrigatório." />
+							<p:outputLabel for="cont" value="Contato: " />
+							<p:inputText id="cont" value="#{instrutorController.instrutor.contato}"
+								required="true"
+								requiredMessage="O campo Contato é obrigatório." />
+							<f:facet name="footer">
+								<div class="botao">
+									<p:commandButton value="Cancelar"
+										action="#{instrutorController.limparPut}" ajax="false"
+										immediate="true" icon="ui-icon-circle-close"
+										style="background: #FF0000;color: #ffffff;" />
+									<p:commandButton value="Salvar"
+										action="#{instrutorController.salvar}" ajax="false"
+										icon="ui-icon-circle-check"
+										style="background: #006400;color: #ffffff;" />
+								</div>
+							</f:facet>
+						</p:panelGrid>
+					</div>
+				</div>
+			</div>
+			<div class="p-col-12 p-md-9 p-col-nogutter">
+				<div class="p-grid">
+					<div class="p-col-12">
+						<p:dataTable value="#{instrutorController.listar}" var="i"
+							resizableColumns="true" emptyMessage="Nenhum Instrutor Cadastrado"
+							style="width:98.5%;">
+							<f:facet name="header">
+								<h:outputText value="Instrutores Cadastrados" />
+							</f:facet>
+							<p:column headerText="Nome" style="text-align:center;">
+								<h:outputText value="#{i.nome}" />
+							</p:column>
+							<p:column headerText="Descrição" style="text-align:center;">
+								<h:outputText value="#{i.descricao}" />
+							</p:column>
+							<p:column headerText="Contato" style="text-align:center;">
+								<h:outputText value="#{i.contato}" />
+							</p:column>
+							<p:column headerText="Ações" style="text-align:center;width:20%;">
+								<p:commandButton title="Excluir" value="Excluir"
+									action="#{instrutorController.remover}"
+									onclick="return confirm('Confirma a exclusão do Instrutor #{i.nome} com Id = #{i.id} ?')"
+									icon="ui ui-icon-trash" ajax="false" immediate="true"
+									style="background: #ff0000;color:#ffffff">
+									<f:setPropertyActionListener value="#{i}"
+										target="#{instrutorController.instrutor}" />
+								</p:commandButton>
+								<p:commandButton title="Editar" value="Editar"
+									action="#{instrutorController.atualizar}" icon="ui ui-icon-pencil"
+									ajax="false" immediate="true"
+									style="background: #000099;color:#ffffff">
+									<f:setPropertyActionListener value="#{i}"
+										target="#{instrutorController.instrutor}" />
+								</p:commandButton>
+							</p:column>
+						</p:dataTable>
+					</div>
+				</div>
+			</div>
+
+			<div class="p-col-12">
+				<div class="rodape">
+					<h:outputText style="margin-top: -4px;font-size:12px;"
+						value="6º Período/Estágio Supervisionado" />
+					<br />
+					<h:outputText style="font-size:14px;margin-right: 16px;"
+						value="Sistemas de Informação" />
+				</div>
+			</div>
+		</div>
+	</h:form>
+</h:body>
+
+</html>
