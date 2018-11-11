@@ -149,7 +149,11 @@ public class Curso implements Serializable {
 	}
 	
 	public Integer getVagasDisponiveis() {
-		vagasDisponiveis = (qtdVaga - matriculas.size());
+		if(matriculas.isEmpty()) {
+			vagasDisponiveis = qtdVaga;
+		}else {
+			vagasDisponiveis = (qtdVaga - matriculas.size());
+		}
 		return vagasDisponiveis;
 	}
 
